@@ -1,0 +1,11 @@
+navbar login normal user -> edit profile, view profile, logout
+	view profile -> ver perfil
+	edit profile -> editar perfil (password retype)
+		educational level (radio button) 
+			degree
+			higher voca
+
+
+
+navbar admin -> normal + admin area
+	

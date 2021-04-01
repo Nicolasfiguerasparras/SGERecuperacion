@@ -1,0 +1,50 @@
+html, body{
+    font-family: 'Balsamiq Sans', cursive;
+}
+
+.logo{
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Adidas_Logo.svg/1280px-Adidas_Logo.svg.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    box-shadow: 3px 3px 3px #888888;
+
+    height: 10vh;
+}
+
+.search{
+    width: 20%;
+}
+
+.lateralNav{
+    margin-top: 0.5vh;
+    background-color: aqua;
+    height: 89.5vh;
+}
+
+.topNav{
+    background-color: aqua;
+    box-shadow: 3px 3px 3px #888888;
+
+    display: flex;
+    align-items: center;
+}
+
+.topContent{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+}
+
+.centerContent{
+    height: 20vh;
+}
+
+.bottomCenter{
+    min-height: 40vh;
+}
+
+.footer{
+    height: 20vh;
+}
