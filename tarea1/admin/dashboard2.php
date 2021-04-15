@@ -1,4 +1,26 @@
-<?php require_once("header.php"); ?>
+<?php 
+    require_once("header.php");
+
+    // Total members count
+    // $queryTotal = "SELECT * FROM users";
+    // $resultsetTotal = $dbc->query($queryTotal);
+    // $totalMembers = $resultsetTotal->rowCount();
+
+    // // Members last week
+    // $queryLastWeek = "SELECT * FROM users WHERE member_from > DATE_SUB(NOW(), INTERVAL 7 DAY)";
+    // $resulsetLastWeek = $dbc->query($queryLastWeek);
+    // $totalLastWeek = $queryLastWeek->rowCount();
+
+    // // Members today
+    // $queryToday = "SELECT * FROM users WHERE member_from = CURLDATE()";
+    // $resulsetToday = $dbc->query($queryToday);
+    // $totalToday = $resulsetToday->rowCount();
+
+    // // Percentajes
+    // $lastweek_percent = $totalLastWeek/$totalMembers*100;
+    // $today_percent = $totalToday/$totalMembers*100;
+    // $lastweek_percent = number_format($lastweek_percent, 2);
+?>
         
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Tarea 1</a>
@@ -53,26 +75,27 @@
 
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
-                    <div style="border-style: dotted; width: 45%">
-                        <h2>Hola</h2>
+                    <div style="border: 2px solid gray; border-radius: 5px; width: 45%">
+                        <h2>Total members</h2>
                     </div>
-                    <div style="border-style: dotted; width: 45%">
-                        <h2>Hola</h2>
+                    <div style="border: 2px solid gray; border-radius: 5px; width: 45%">
+                        <h2>New members</h2>
                     </div>
                 </div>
 
                 
 
-                <h2>Section title</h2>
+                
                 <div class="table-responsive">
+                    <h2>Membership</h2>
                     <table class="table table-striped table-sm">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Graduation Year</th>
+                                <th>Member from</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>

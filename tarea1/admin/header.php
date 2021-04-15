@@ -1,3 +1,7 @@
+<?php
+    require_once('../dbArrayConf.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,8 +23,9 @@
         <link rel="mask-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
         <link rel="icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/favicon.ico">
         <meta name="theme-color" content="#7952b3">
+        <script src="https://kit.fontawesome.com/3aece9fc73.js" crossorigin="anonymous"></script>
         
         <!-- Custom styles -->
-        <link href="dashboard.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
     </head>
     <body>
