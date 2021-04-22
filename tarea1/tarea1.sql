@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-03-2021 a las 09:48:55
+-- Tiempo de generación: 22-04-2021 a las 16:10:54
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -24,20 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sessions`
---
-
-CREATE TABLE `sessions` (
-  `session_id` int(11) NOT NULL,
-  `session_userid` int(11) NOT NULL,
-  `session_token` varchar(30) NOT NULL,
-  `session_serial` varchar(40) NOT NULL,
-  `session_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -52,15 +38,17 @@ CREATE TABLE `users` (
   `address` varchar(50) NOT NULL,
   `postal_code` int(5) NOT NULL,
   `city` varchar(50) NOT NULL,
-  `state` varchar(50) NOT NULL
+  `state` varchar(50) NOT NULL,
+  `member_from` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`, `birth_date`, `address`, `postal_code`, `city`, `state`) VALUES
-(1, 'user', '12dea96fec20593566ab75692c9949596833adc9', 'User', 'User', 'user@user.com', '2021-03-01', 'address', 18008, 'Granada', 'Spain');
+INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`, `birth_date`, `address`, `postal_code`, `city`, `state`, `member_from`) VALUES
+(1, 'user', '12dea96fec20593566ab75692c9949596833adc9', 'User', 'User', 'user@user.com', '2021-03-01', 'address', 18008, 'Granada', 'Spain', '2021-04-20'),
+(2, 'user2', 'a1881c06eec96db9901c7bbfe41c42a3f08e9cb4', 'User', 'Dos', 'user2@user.com', '2001-04-05', 'Dirección', 18009, 'Granada', 'Spain', '2021-04-18');
 
 --
 -- Índices para tablas volcadas
@@ -80,7 +68,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

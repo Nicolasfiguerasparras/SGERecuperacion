@@ -8,20 +8,39 @@
 
     // Members last week
     $queryLastWeek = "SELECT * FROM users WHERE member_from > DATE_SUB(NOW(), INTERVAL 7 DAY)";
-    $resulsetLastWeek = $dbh->query($queryLastWeek);
-    print_r($resulsetLastWeek);
-    exit();
-    // $totalLastWeek = $queryLastWeek->rowCount();
+    $stmt = $dbh->prepare($queryLastWeek);
+    $stmt->execute();
 
-    // // Members today
-    // $queryToday = "SELECT * FROM users WHERE member_from = CURLDATE()";
-    // $resulsetToday = $dbc->query($queryToday);
-    // $totalToday = $resulsetToday->rowCount();
+    $totalLastWeek = 0;
+    while($row = $stmt->fetch()) {
+        $totalLastWeek++;
+    }
 
-    // // Percentajes
-    // $lastweek_percent = $totalLastWeek/$totalMembers*100;
-    // $today_percent = $totalToday/$totalMembers*100;
-    // $lastweek_percent = number_format($lastweek_percent, 2);
+    // Members last year
+    $queryLastWeek = "SELECT * FROM users WHERE member_from > DATE_SUB(NOW(), INTERVAL 365 DAY)";
+    $stmt = $dbh->prepare($queryLastWeek);
+    $stmt->execute();
+
+    $totalLastYear = 0;
+    while($row = $stmt->fetch()) {
+        $totalLastYear++;
+    }
+
+    // Members today
+    $queryToday = "SELECT * FROM users WHERE member_from = CURDATE()";
+    $stmt = $dbh->prepare($queryToday);
+    $stmt->execute();
+
+    $totalToday = 0;
+    while($row = $stmt->fetch()){
+        $totalToday++;
+    }
+
+    // Percentajes
+    $lastweek_percent = $totalLastWeek/$totalMembers*100;
+    $today_percent = $totalToday/$totalMembers*100;
+    $lastweek_percent = number_format($lastweek_percent, 2);
+    $lastyear_percent = $totalLastYear/$totalMembers*100;
 ?>
         
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -69,7 +88,7 @@
                     <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Refresh</button>
                         </div>
                     
                     </div>
@@ -78,10 +97,40 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
 
                     <div style="border: 2px solid gray; border-radius: 5px; width: 45%">
-                        <h2>Total members</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2>New members on the last week</h2>
+                            </div>
+                            <div class="col-6">
+                                <h2>New members today</h2>
+                                <h5><?php echo $totalToday; ?></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: <?php echo intval($lastweek_percent); ?>%" aria-valuenow="<?php echo intval($lastweek_percent)."%"; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo intval($lastweek_percent); ?>%</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div style="border: 2px solid gray; border-radius: 5px; width: 45%">
-                        <h2>New members</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2>New members on this year</h2>
+                            </div>
+                            <div class="col-6">
+                                <h2>Total members</h2>
+                                <h5><?php echo $totalMembers; ?></h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: <?php echo intval($lastyear_percent); ?>%" aria-valuenow="<?php echo intval($lastyear_percent)."%"; ?>" aria-valuemin="0" aria-valuemax="100"><?php echo $lastyear_percent; ?>%</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -101,121 +150,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>juanjo</td>
-                                <td>Juan José</td>
-                                <td>22/06/2021</td>
-                                <td>22/03/2021</td>
-                                <td>
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#editModal"><i class="far fa-edit"></i></button>
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#altaModal"><i class="far fa-user"></i></button> 
-                                    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#borrarModal"><i class="fas fa-user-slash"></i></button> 
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>text</td>
-                                <td>random</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>placeholder</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>irrelevant</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>visual</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>random</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>text</td>
-                            </tr>
+                            <?php
+                                // Members
+                                $members = "SELECT * FROM users";
+                                $stmt = $dbh->prepare($members);
+                                $stmt->execute();
+
+                                while($row = $stmt->fetch()) {
+                                    echo "
+                                        <tr>
+                                            <td>$row->username</td>
+                                            <td>$row->first_name $row->last_name</td>
+                                            <td>graduation year</td>
+                                            <td>$row->member_from</td>
+                                            <td>
+                                                <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button>
+                                                <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#altaModal'><i class='far fa-user'></i></button> 
+                                                <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#borrarModal'><i class='fas fa-user-slash'></i></button>
+                                            </td>
+                                        </tr>
+                                    ";
+                                }
+                            ?>
                         </tbody>
                     </table>
                 </div>
