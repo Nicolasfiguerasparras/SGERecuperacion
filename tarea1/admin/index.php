@@ -164,7 +164,7 @@
                                             <td>graduation year</td>
                                             <td>$row->member_from</td>
                                             <td>
-                                                <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button>
+                                                <button id='".$row->id."' type='button' class='btn btnEdit' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button>
                                                 <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#altaModal'><i class='far fa-user'></i></button> 
                                                 <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#borrarModal'><i class='fas fa-user-slash'></i></button>
                                             </td>
