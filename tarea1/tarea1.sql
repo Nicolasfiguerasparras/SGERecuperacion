@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-04-2021 a las 16:10:54
+-- Tiempo de generación: 23-04-2021 a las 01:22:00
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `session_id` int(11) NOT NULL,
+  `session_userid` int(11) NOT NULL,
+  `session_token` varchar(30) NOT NULL,
+  `session_serial` varchar(40) NOT NULL,
+  `session_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `users`
 --
 
@@ -39,16 +53,18 @@ CREATE TABLE `users` (
   `postal_code` int(5) NOT NULL,
   `city` varchar(50) NOT NULL,
   `state` varchar(50) NOT NULL,
-  `member_from` date NOT NULL
+  `member_from` date NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `trash` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`, `birth_date`, `address`, `postal_code`, `city`, `state`, `member_from`) VALUES
-(1, 'user', '12dea96fec20593566ab75692c9949596833adc9', 'User', 'User', 'user@user.com', '2021-03-01', 'address', 18008, 'Granada', 'Spain', '2021-04-20'),
-(2, 'user2', 'a1881c06eec96db9901c7bbfe41c42a3f08e9cb4', 'User', 'Dos', 'user2@user.com', '2001-04-05', 'Dirección', 18009, 'Granada', 'Spain', '2021-04-18');
+INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `email`, `birth_date`, `address`, `postal_code`, `city`, `state`, `member_from`, `status`, `trash`) VALUES
+(1, 'user', '12dea96fec20593566ab75692c9949596833adc9', 'User', 'User', 'user@user.com', '2021-03-01', 'address', 18008, 'Granada', 'Spain', '2021-04-20', 0, 0),
+(2, 'user2', 'a1881c06eec96db9901c7bbfe41c42a3f08e9cb4', 'User', 'Dos', 'user2@user.com', '2001-04-05', 'Dirección', 18009, 'Granada', 'Spain', '2021-04-18', 0, 0);
 
 --
 -- Índices para tablas volcadas
