@@ -1,7 +1,15 @@
 <?php
     require_once('header.php');
 
-    if(isset($_POST['confirmar']))
+    if(isset($_POST['confirmar'])){
+        $id = $_POST['id'];
+        $queryUser = "UPDATE `users` SET `status` = '1' WHERE `users`.`id` = $id";
+        $stmt = $dbh->prepare($queryUser);
+        $stmt->execute();
+        header('Location: index.php');
+    }elseif(isset($_POST['cancelar'])){
+        header('Location: index.php');
+    }
 ?>
 
 <div class="container-fluid">
@@ -11,7 +19,8 @@
         <div class="col-10 offset-1">
             <h2>Dar de alta</h2>
             <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <a href="index.php"><button class="btn btn-danger" type="submit" name="cancelar">Cancelar</button></a>
+                <input type="hidden" name="id" value="<?php echo $_GET['user_id']; ?>">
+                <button class="btn btn-danger" type="submit" name="cancelar">Cancelar</button></a>
                 <button class="btn btn-success" type="submit" name="confirmar">Confirmar</button>
             </form>
             
