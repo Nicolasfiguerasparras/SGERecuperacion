@@ -164,9 +164,9 @@
                                             <td>graduation year</td>
                                             <td>$row->member_from</td>
                                             <td>
-                                                <button id='".$row->id."' type='button' class='btn btnEdit' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button>
-                                                <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#altaModal'><i class='far fa-user'></i></button> 
-                                                <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#borrarModal'><i class='fas fa-user-slash'></i></button>
+                                                <a href='editModal.php?user_id=$row->id'><button id='$row->id' type='button' class='btn btnEdit' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button></a>
+                                                <a href='altaModal.php?user_id=$row->id'><button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#altaModal'><i class='far fa-user'></i></button></a>
+                                                <a href='borrarModal.php?user_id=$row->id'><button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#borrarModal'><i class='fas fa-user-slash'></i></button></a>
                                             </td>
                                         </tr>
                                     ";
@@ -180,7 +180,7 @@
     </div>
 
 <?php
-    require_once("editModal.php");
+    // require_once("editModal.php");
     require_once("altaModal.php");
     require_once("borrarModal.php");
     require_once("footer.php");
