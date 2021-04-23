@@ -41,6 +41,14 @@
     $today_percent = $totalToday/$totalMembers*100;
     $lastweek_percent = number_format($lastweek_percent, 2);
     $lastyear_percent = $totalLastYear/$totalMembers*100;
+
+
+    if(isset($_POST['search'])){
+        $text = $_POST['search'];
+        $searchQuery = "SELECT * FROM users WHERE username LIKE '%$text%'";
+        $stmtSearch = $dbh->prepare($searchQuery);
+        $stmtSearch->execute();
+    }
 ?>
         
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -48,7 +56,9 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form-inline"  style="width: 100%;">
+            <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search" name="search">
+        </form>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
                 <a class="nav-link" href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Circle-icons-profile.svg/1200px-Circle-icons-profile.svg.png" alt="" style="width: 30px; color: white;"></a>
@@ -151,55 +161,161 @@
                         </thead>
                         <tbody>
                             <?php
-                                // Members
-                                $members = "SELECT * FROM users";
-                                $stmt = $dbh->prepare($members);
-                                $stmt->execute();
-
-                                while($row = $stmt->fetch()) {
-                                    echo "
-                                        <tr>
-                                            <td>$row->username</td>
-                                            <td>$row->first_name $row->last_name</td>
-                                            <td>graduation year</td>
-                                            <td>".date('d-m-Y', strtotime($row->member_from))."</td>
-                                            <td>
-                                                <a href='editModal.php?user_id=$row->id'><button id='$row->id' type='button' class='btn btnEdit' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button></a>";
-                                    if($row->status == 0){
-                                        echo "
-                                            <a href='altaModal.php?user_id=$row->id'><button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#altaModal'><i class='far fa-user'></i></button></a>
-                                        ";
+                                if(isset($_GET['pag'])){
+                                    $start = ($_GET['pag']-1)*5;
+                                    $pag = $_GET['pag'];
+                                }else{
+                                    $start = 0;
+                                    $pag = 1;
+                                    if(isset($_GET['type'])){
+                                        $type = $_GET['type'];
+                                        header("Location: index.php?type=$type&pag=$pag");
                                     }else{
+                                        header("Loaction: index.php?type=0&pag=$pag");
+                                    }
+                                }
+
+                                $totalPages = ceil($totalMembers/5);
+                                
+
+                                if(isset($stmtSearch)){
+                                    if($row = $stmtSearch->fetch()){
+                                        do{
+                                            echo "
+                                                <tr>
+                                                    <td>$row->username</td>
+                                                    <td>$row->first_name $row->last_name</td>
+                                                    <td>graduation year</td>
+                                                    <td>".date('d-m-Y', strtotime($row->member_from))."</td>
+                                                    <td>
+                                                        <button id='$row->id' type='button' class='btn btnEdit' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button>";
+                                            if($row->status == 1){
+                                                echo "
+                                                    <button id=".$row->id." type='button' class='btn btnAlta' data-bs-toggle='modal' data-bs-target='#altaModal'><i class='far fa-user'></i></button>
+                                                ";
+                                            }else{
+                                                echo "
+                                                    <button id=".$row->id." type='button' class='btn btnAlta' data-bs-toggle='modal' data-bs-target='#altaModal' disabled><i class='far fa-user'></i></button>
+                                                ";
+                                            }
+
+                                            if($row->trash == 0){
+                                                echo "
+                                                    <button id=".$row->id." type='button' class='btn btnBorrar' data-bs-toggle='modal' data-bs-target='#borrarModal'><i class='fas fa-user-slash'></i></button>
+                                                ";
+                                            }else{
+                                                echo "
+                                                    <button id=".$row->id." type='button' class='btn btnBorrar' data-bs-toggle='modal' data-bs-target='#borrarModal' disabled><i class='fas fa-user-slash'></i></button>
+                                                ";
+                                            }
+                                            echo "
+                                                    </td>
+                                                </tr>
+                                            ";
+                                        }while($row = $stmtSearch->fetch());
+                                    }else{
+                                        echo "No se encontraron resultados";
+                                    }
+                                }else{
+
+                                    if(isset($_GET['type'])){
+                                        if($_GET['type'] == 0){
+                                            $type = $_GET['type'];
+                                            $members = "SELECT * FROM users LIMIT $start,5";
+                                        }elseif($_GET['type'] == 1){
+                                            $type = $_GET['type'];
+                                            $members = "SELECT * FROM users WHERE status = 1 LIMIT $start,5";
+                                        }elseif($_GET['type'] == 2){
+                                            $type = $_GET['type'];
+                                            $members = "SELECT * FROM users WHERE trash = 1 LIMIT $start,5";
+                                        }
+                                    }else{
+                                        $type = 0;
+                                        $members = "SELECT * FROM users LIMIT $start,5";
+                                    }
+                                    // Members
+                                    $stmt = $dbh->prepare($members);
+                                    $stmt->execute();
+
+                                    while($row = $stmt->fetch()) {
                                         echo "
-                                            <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#altaModal' disabled><i class='far fa-user'></i></button>
+                                            <tr>
+                                                <td>$row->username</td>
+                                                <td>$row->first_name $row->last_name</td>
+                                                <td>graduation year</td>
+                                                <td>".date('d-m-Y', strtotime($row->member_from))."</td>
+                                                <td>
+                                                    <button id='$row->id' type='button' class='btn btnEdit' data-bs-toggle='modal' data-bs-target='#editModal'><i class='far fa-edit'></i></button>";
+                                        if($row->status == 1){
+                                            echo "
+                                                <button id=".$row->id." type='button' class='btn btnAlta' data-bs-toggle='modal' data-bs-target='#altaModal'><i class='far fa-user'></i></button>
+                                            ";
+                                        }else{
+                                            echo "
+                                                <button id=".$row->id." type='button' class='btn btnAlta' data-bs-toggle='modal' data-bs-target='#altaModal' disabled><i class='far fa-user'></i></button>
+                                            ";
+                                        }
+
+                                        if($row->trash == 0){
+                                            echo "
+                                                <button id=".$row->id." type='button' class='btn btnBorrar' data-bs-toggle='modal' data-bs-target='#borrarModal'><i class='fas fa-user-slash'></i></button>
+                                            ";
+                                        }else{
+                                            echo "
+                                                <button id=".$row->id." type='button' class='btn btnBorrar' data-bs-toggle='modal' data-bs-target='#borrarModal' disabled><i class='fas fa-user-slash'></i></button>
+                                            ";
+                                        }
+                                        echo "
+                                                </td>
+                                            </tr>
                                         ";
                                     }
-
-                                    if($row->trash == 0){
-                                        echo "
-                                            <a href='borrarModal.php?user_id=$row->id'><button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#borrarModal'><i class='fas fa-user-slash'></i></button></a>
-                                        ";
-                                    }else{
-                                        echo "
-                                            <button id=".$row->id." type='button' class='btn' data-bs-toggle='modal' data-bs-target='#borrarModal' disabled><i class='fas fa-user-slash'></i></button>
-                                        ";
-                                    }
-                                    echo "
-                                            </td>
-                                        </tr>
-                                    ";
                                 }
                             ?>
                         </tbody>
                     </table>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                            <?php
+                                if($pag == 1){
+                                    echo "
+                            <li class='page-item disabled'>
+                                    ";
+                                }else{
+                                    echo "
+                            <li class='page-item'>
+                                    ";
+                                }
+                            ?>
+                                <a class="page-link" href="index.php?type=<?php echo $type; ?>&pag=<?php echo $pag-1; ?>" tabindex="-1">Previous</a>
+                            </li>
+                            <?php
+                                if($pag == $totalPages){
+                                    echo "
+                            <li class='page-item disabled'>
+                                    ";
+                                }else{
+                                    echo "
+                            <li class='page-item'>
+                                    ";
+                                }
+                            ?>
+                                <a class="page-link" href="index.php?type=<?php echo $type; ?>&pag=<?php echo $pag+1; ?>">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a href='index.php?type=0'><button class="btn btn-secondary">Todos</button></a>
+                    <a href='index.php?type=1'><button class="btn btn-secondary">Alta</button></a>
+                    <a href='index.php?type=2'><button class="btn btn-secondary">Baja</button></a>
+
                 </div>
             </main>
         </div>
     </div>
 
 <?php
-    // require_once("editModal.php");
-    // require_once("altaModal.php");
-    // require_once("borrarModal.php");
+    require_once("editModal.php");
+    require_once("altaModal.php");
+    require_once("borrarModal.php");
     require_once("footer.php");
 ?>
