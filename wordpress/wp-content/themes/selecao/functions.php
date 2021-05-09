@@ -1,4 +1,9 @@
 <?php
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+
+    // AÑADIR SOPORTES AL TEMA
+    add_theme_support('post-thumbnails'); // Añade la posibilidad de elegir foto representativa
 
     function my_theme_scripts() {
         wp_register_script('jquery', get_template_directory_uri().'/assets/js/jQuery.js', null, null, false);

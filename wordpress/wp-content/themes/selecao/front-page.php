@@ -77,6 +77,49 @@
 
     <main id="main">
 
+        <section class="details-card">
+            <div class="container">
+                <div class="row">
+
+                    <?php
+                        // Sacar los últimos 3 posts publicados --- APRENDER DE MEMORIA
+                        $args = array(
+                            'posts_per_page' => 3,
+                        );
+
+                        $query = new WP_Query($args);
+
+                        if($query->have_posts()):
+                            while($query->have_posts()):
+                                $query->the_post();
+                            ?>
+                                
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <div class="card-img">
+                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
+                                <span><h4></h4></span>
+                            </div>
+                            <div class="card-desc">
+                                <h3><?php the_title(); ?></h3>
+                                <p><?php the_excerpt(); ?></p>
+                                    <a href="<?php the_permalink(); ?>" class="btn-card">Read more...</a>   
+                            </div>
+                        </div>
+                    </div>
+                            <?php
+                                
+                            endwhile;
+                        else:
+                            echo 'No posts published yet...';
+                        endif;
+
+                        wp_reset_query();
+                    ?>
+                </div>
+            </div>
+        </section>
+
         <!-- ======= About Section ======= -->
         <section id="about" class="about">
         <div class="container">
