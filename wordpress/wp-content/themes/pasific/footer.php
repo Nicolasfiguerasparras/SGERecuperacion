@@ -24,33 +24,12 @@
             </div>
         </footer>
         
+        <?php
 
-        <!-- JQuery Core
-        =====================================-->
-        <script src="assets/js/core/jquery.min.js"></script>
-        <script src="assets/js/core/bootstrap-3.3.7.min.js"></script>
-        
-        <!-- Magnific Popup
-        =====================================-->
-        <script src="assets/js/magnific-popup/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/magnific-popup/magnific-popup-zoom-gallery.js"></script>
-        
-        <!-- Progress Bars
-        =====================================-->
-        <script src="assets/js/progress-bar/circle-progress.js"></script>
-        <script src="assets/js/progress-bar/circle-progress-main.js"></script>
-        
-        <!-- JQuery Main
-        =====================================-->
-        <script src="assets/js/main/jquery.appear.js"></script>
-        <script src="assets/js/main/isotope.pkgd.min.js"></script>
-        <script src="assets/js/main/parallax.min.js"></script>
-        <script src="assets/js/main/jquery.countTo.js"></script>
-        <script src="assets/js/main/owl.carousel.min.js"></script>
-        <script src="assets/js/main/jquery.sticky.js"></script>
-        <script src="assets/js/main/imagesloaded.pkgd.min.js"></script>
-        <script src="assets/js/main/main.js"></script>      
-        
+            wp_footer();
+
+        ?>
+
     </body>
 
 </html>
