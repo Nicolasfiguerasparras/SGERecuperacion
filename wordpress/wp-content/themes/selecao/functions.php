@@ -37,8 +37,8 @@
         wp_register_style('animate', get_template_directory_uri().'/assets/vendor/animate.css/animate.min.css', null, null, false);
         wp_enqueue_style('animate');
 
-        wp_register_style('aos', get_template_directory_uri().'/assets/vendor/aos/aos.css', null, null, false);
-        wp_enqueue_style('aos');
+        wp_register_style('aoscss', get_template_directory_uri().'/assets/vendor/aos/aos.css', null, null, false);
+        wp_enqueue_style('aoscss');
 
         wp_register_style('bootstrap', get_template_directory_uri().'/assets/vendor/bootstrap/css/bootstrap.min.css', null, null, false);
         wp_enqueue_style('bootstrap');

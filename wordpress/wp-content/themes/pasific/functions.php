@@ -6,8 +6,8 @@
     add_theme_support('post-thumbnails'); // Añade la posibilidad de elegir foto representativa
 
     function my_theme_scripts() {
-        wp_register_script('jquery', get_template_directory_uri().'/assets/js/core/jquery.min.js', null, null, false);
-        wp_enqueue_script('jquery');
+        wp_register_script('JQuery', get_template_directory_uri().'/assets/js/core/jquery.min.js', null, null, false);
+        wp_enqueue_script('JQuery');
 
         wp_register_script('bootstrap', get_template_directory_uri().'/assets/js/core/bootstrap-3.3.7.min.js', null, null, false);
         wp_enqueue_script('bootstrap');
@@ -24,8 +24,8 @@
         wp_register_script('circle-progress-main', get_template_directory_uri().'/assets/js/progress-bar/circle-progress-main.js', null, null, false);
         wp_enqueue_script('circle-progress-main');
 
-        wp_register_script('jquery', get_template_directory_uri().'/assets/js/main/jquery.appear.js', null, null, false);
-        wp_enqueue_script('jquery');
+        wp_register_script('jquery.appears', get_template_directory_uri().'/assets/js/main/jquery.appear.js', null, null, false);
+        wp_enqueue_script('jquery.appears');
 
         wp_register_script('isotope', get_template_directory_uri().'/assets/js/main/isotope.pkgd.min.js', null, null, false);
         wp_enqueue_script('isotope');
