@@ -45,31 +45,7 @@
         
         <!-- Navigation Area
         ===================================== -->        
-        <nav class="navbar navbar-pasific navbar-op navbar-sticky bb-solid-1">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo/logo-default.png" alt="logo">
-                    Pasific H.
-                </a>
-            </div>
-
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="hidden"><a href="#page-top"></a></li>
-                    <li><a href="#welcome">Welcome</a></li>
-                    <li><a href="#portfolioGrid">Works</a></li>
-                    <li><a href="#fact">Fact</a></li>
-                    <li><a href="#price">Price</a></li>
-                    <li><a href="#service">Service</a></li>
-                    <li><a href="#blogs">Blog</a></li>                      
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <a href="#" id="buttonHire" class="button button-sm button-pasific hover-ripple-out mt10 mr10 pull-right">Hire Me</a>
-            </div>
-        </nav>
+        <?php get_template_part('nav'); ?>
         
         <!-- Blog Area
         ===================================== -->
@@ -87,80 +63,56 @@
                 </div>
                 
                 <div class="row">
+
+
+                    <?php
+
+                        // Sacar los últimos 3 posts publicados --- APRENDER DE MEMORIA
+                        $args = array(
+                            'post_per_page' => 3,
+                        );
+
+                        $query = new WP_Query($args);
+
+                        if($query->have_posts()):
+                            while($query->have_posts()):
+                                $query->the_post();
+                    ?>
                     
                     <div class="col-md-4 col-sm-6 col-xs-12 mb50">
+
                         <div class="blog-one">
                             <div class="blog-one-header">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/blog/img-blog-2.jpg" alt="blog image" class="img-responsive">
+                                <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="blog image" class="img-responsive">
                             </div>
                             <div class="blog-one-attrib">                                
                                 <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-1.jpg" alt="photo blog" class="blog-author-photo">
-                                <span class="blog-author-name">Harry Boo</span>
-                                <span class="blog-date">PEB. 14 2016</span>                                                           
+                                <span class="blog-author-name"><?php the_author(); ?></span>
+                                <span class="blog-date"><?php the_date(); ?></span>                                                           
                             </div>
                             <div class="blog-one-body">
-                                <h4 class="blog-title"><a href="#">Amazing Blog Post One</a></h4>
+                                <h4 class="blog-title"><a href="#"><?php the_title(); ?></a></h4>
                                 <p class="">
-                                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
+                                    <?php the_excerpt(); ?>
                                 </p>
                             </div>
                             <div class="blog-one-footer">
-                                <a href="#">Read More</a>
-                                <i class="fa fa-heart"></i>59 Likes
-                                <i class="fa fa-comments"></i><a href="#">120 Comments</a>
+                                <a href="<?php the_permalink(); ?>">Read More</a>
+                                <!-- <i class="fa fa-heart"></i>59 Likes
+                                <i class="fa fa-comments"></i><a href="#">120 Comments</a> -->
                             </div>
                         </div>
                     </div>
                     
-                    <div class="col-md-4 col-sm-6 col-xs-12 mb50">
-                        <div class="blog-one">
-                            <div class="blog-one-header">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/blog/img-blog-4.jpg" alt="blog image" class="img-responsive">
-                            </div>
-                            <div class="blog-one-attrib">                                
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-4.jpg" alt="photo blog" class="blog-author-photo">
-                                <span class="blog-author-name">Melanie Boo</span>
-                                <span class="blog-date">PEB. 14 2016</span>                                                           
-                            </div>
-                            <div class="blog-one-body">
-                                <h4 class="blog-title"><a href="#">Amazing Blog Post One</a></h4>
-                                <p class="">
-                                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
-                                </p>
-                            </div>
-                            <div class="blog-one-footer">
-                                <a href="#">Read More</a>
-                                <i class="fa fa-heart"></i>59 Likes
-                                <i class="fa fa-comments"></i><a href="#">120 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4 col-sm-6 col-xs-12 mb50">
-                        <div class="blog-one">
-                            <div class="blog-one-header">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/blog/img-blog-3.jpg" alt="blog image" class="img-responsive">
-                            </div>
-                            <div class="blog-one-attrib">                                
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-2.jpg" alt="photo blog" class="blog-author-photo">
-                                <span class="blog-author-name">Harry Boo</span>
-                                <span class="blog-date">PEB. 14 2016</span>                                                           
-                            </div>
-                            <div class="blog-one-body">
-                                <h4 class="blog-title"><a href="#">Amazing Blog Post One</a></h4>
-                                <p class="">
-                                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
-                                </p>
-                            </div>
-                            <div class="blog-one-footer">
-                                <a href="#">Read More</a>
-                                <i class="fa fa-heart"></i>59 Likes
-                                <i class="fa fa-comments"></i><a href="#">120 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
+                    <?php
+                            endwhile;
+                        else:
+                            echo "No post published yet...";
+                        endif;
+
+                        wp_reset_query();
+
+                    ?>
                     
                 </div>
                 
