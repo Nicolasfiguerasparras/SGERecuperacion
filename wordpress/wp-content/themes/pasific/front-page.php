@@ -91,7 +91,7 @@
                                 <span class="blog-date"><?php the_date(); ?></span>                                                           
                             </div>
                             <div class="blog-one-body">
-                                <h4 class="blog-title"><a href="#"><?php the_title(); ?></a></h4>
+                                <h4 class="blog-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
                                 <p class="">
                                     <?php the_excerpt(); ?>
                                 </p>

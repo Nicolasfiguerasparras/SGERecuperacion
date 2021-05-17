@@ -26,7 +26,7 @@
 
     // Si existe la clase, la instanciamos
     if(class_exists('Events')){
-        $arquiproject = new Events();
+        $events = new Events();
         // Una vez que la instanciamos, ejecutamos el método de la clase que me registra el custom post type
-        $arquiproject->execute_actions();
+        $events->execute_actions();
     }

@@ -1,6 +1,6 @@
 <?php
     global $numposts;
-    $numposts++;
+    $numposts = $numposts + 1;
 ?>
 
 <tr>

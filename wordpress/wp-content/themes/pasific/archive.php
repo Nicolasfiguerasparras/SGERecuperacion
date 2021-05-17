@@ -1,7 +1,6 @@
 <?php
     get_header();
 
-    $num_posts_founded = $wp_the_query->found_posts;
     $criterio = '';
     $loquebusco = '';
 
@@ -26,4 +25,9 @@
     }
 
     echo "Archives for: ".$criterio;
+
+    $num_posts_founded = $wp_the_query->found_posts;
+    global $numposts;
+    $numposts = 0;
+
 ?>
