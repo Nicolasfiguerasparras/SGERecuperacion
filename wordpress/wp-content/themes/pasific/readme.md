@@ -5,4 +5,7 @@
 
 index paginación
 
-- Sacar clave del criterio
+- Sacar post destacado en el top de index y luego el resto de posts
+- Sacar sidebar a un archivo único
+
+- Archives: Post por autor y posts más populares

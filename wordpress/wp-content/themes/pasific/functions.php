@@ -109,3 +109,47 @@
     }
 
     add_action('wp_enqueue_scripts', 'my_theme_scripts');
+
+    /*
+     *
+     * Obterner un listado con los tags del autor
+     */
+
+    function list_tags($limit) {
+        $args = array(
+            'orderby' => 'count',
+            'order' => 'DESC',
+            'number' => $limit,
+        );
+
+        $tags = get_tags($args);
+
+        foreach($tags as $tag) {
+            echo "<a href='".get_tag_link($tag->term_id)."' rel='tag'>".$tag->name."<span>[". $tag->count ."]</span>";
+        }
+    }
+
+    function post_categories($post_id) {
+        $cats = get_the_category($post_id);
+        $string = '';
+        foreach($cats as $cat) {
+            $string .= "<a href='".get_category_link($cat->term_id)."'>".$cat->name."</a>";
+        }
+
+        return substr($string, 0, -2);
+    }
+
+    /*
+     * Registrar widgets
+     * 
+     */
+    function my_sidebar_widget() {
+        register_sidebar(array(
+            'name' => 'Sidebar Tag Cloud',
+            'id' => 'sidebar_tg',
+            'description' => 'Sidebar Tag Cloud Widget',
+            'before_widget' => '<div>',
+            'after_widget' => '</div>',
+        ));
+    }
+    add_action('widgets_init', 'my_sidebar_widget');

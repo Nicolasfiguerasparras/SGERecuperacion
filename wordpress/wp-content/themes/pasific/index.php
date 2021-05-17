@@ -73,9 +73,24 @@
                 <div class="row">
                     <div class="col-md-9 mt25">
                     <div class="col-md-8 col-md-offset-2">
+
+                        <?php
+
+                            // Sacar último post
+                            $args = array(
+                                'post_per_page' => 1,
+                                'post__not_in' => $post_destacado_id,
+                            );
+
+                            $destacado = new WP_Query($args);
+
+                            if($destacado->have_posts()):
+                                while($destacado->have_posts()):
+                                    $destacado->the_post();
+                        ?>
                         
                         <div class="blog-three-mini">
-                            <h2 class="color-dark"><a href="#">How to design good layout for blog page</a></h2>
+                            <h2 class="color-dark"><a href="#"><?php the_title(); ?></a></h2>
                             <div class="blog-three-attrib">
                                 <div><i class="fa fa-calendar"></i>Dec 15 2015</div> | 
                                 <div><i class="fa fa-pencil"></i><a href="#">Harry Boo</a></div> | 
@@ -122,6 +137,13 @@
                             </div>
                             
                         </div>
+
+                        <?php
+                                endwhile;
+                            else:
+                                'No posts published yet...';
+                            endif;
+                        ?>
                         
                         <div class="row">
                             <div class="col-md-12 text-center">
