@@ -9,6 +9,8 @@
 
     // Obtener categorías con wp_list_categories('title_li=&show_count=1&echo=0')
 
+    get_header();
+
 ?>
 
 <li>
@@ -57,3 +59,40 @@
         <?php wp_get_archives('show_post_count=l&type=yearly'); ?>
     </ul>
 </li>
+
+<?php
+    $args = array(
+        'display_name',
+        'ID',
+    );
+    $authors = get_users($args); // De esta forma indicamos que solo coja los campos que le pedimos por el array de argumentos
+    
+    foreach($authors as $author) {
+        echo "
+            <li>
+                <h4>Posts por $author->display_name</h4>
+                <ul>";
+
+        $args = array(
+            'author' => $author->ID,
+            'orderby' => 'post_date',
+            'order' => 'DESC',
+        );
+        $author_posts = get_posts($args);
+        foreach($author_posts as $my_post) {
+            echo "
+                    <li><a href='".get_permalink($my_post->ID)."'>".$my_post->post_title."</a></li>
+            ";
+        }
+                    
+        echo "
+                </ul>
+            </li>
+        ";
+    }
+?>
+
+
+<?php
+    get_footer();
+?>

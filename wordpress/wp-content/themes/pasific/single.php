@@ -81,7 +81,7 @@
                             <h2 class="color-dark"><a href="#"><?php the_title(); ?></a></h2>
                             <div class="blog-three-attrib">
                                 <div><i class="fa fa-calendar"></i><?php the_date(); ?></div> | 
-                                <div><i class="fa fa-pencil"></i><a href="#"><?php the_author(); ?></a></div> | 
+                                <div><i class="fa fa-pencil"></i><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php the_author(); ?></a></div> | 
                                 <div><i class="fa fa-comment-o"></i><a href="#">90 Comments</a></div> | 
                                 <div><a href="#"><i class="fa fa-thumbs-o-up"></i></a>150 Likes</div> | 
                                 <div>
@@ -99,8 +99,9 @@
                             <div class="blog-post-read-tag mt50">
                                 <i class="fa fa-tags"></i> Tags:
                                 <?php
-                                    foreach(get_the_tags($post->ID) as $tag) {
-                                        echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> ';
+                                $tags = get_the_tags($post->ID);
+                                    foreach($tags as $tag) {
+                                        echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> '; // Meter en una variable get_the_tags
                                     }
                                 ?>
                             </div>

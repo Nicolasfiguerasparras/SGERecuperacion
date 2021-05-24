@@ -153,3 +153,83 @@
         ));
     }
     add_action('widgets_init', 'my_sidebar_widget');
+
+    
+    /**
+     * Add social media & image fields to user profile
+     */
+    function add_social_media($user_methods) {
+        // Añadir los campos de texto como queramos
+        $user_methods['facebook'] = 'Facebook account:'; // Array[nombre del campo] = Descripción del campo
+        $user_methods['instagram'] = 'Instagram account:';
+        $user_methods['twitter'] = 'Twitter account:';
+        $user_methods['picture'] = 'Profile personal picture:';
+        
+        return $user_methods;
+    }
+    add_action ('user_contactmethods', 'add_social_media');
+
+
+    /**
+     * Get the author role of an auhor's ID
+     */
+    function get_author_role($author_id) {
+        $user_info = get_userdata($author_id); // Devuelve un array de elementos
+        return implode(', ', $user_info->roles); // Con implode, convertimos el array en una cadena con los elementos separados con comas
+    }
+
+
+    /**
+     * 
+     * Add skills fields to user profile
+     */
+    function add_skills_fields($user) {
+        echo "
+            <h3>User skills</h3>
+            <label for='skill1'>Skill 1</label>
+            <input type='text' name='skill1' id='skill1' value='".esc_attr(get_the_author_meta('skill1', $user->ID))."'></input>
+
+            <label for='skill2'>Skill 2</label>
+            <input type='text' name='skill2' id='skill2' value='".esc_attr(get_the_author_meta('skill2', $user->ID))."'></input>
+
+            <label for='skill3'>Skill 3</label>
+            <input type='text' name='skill3' id='skill3' value='".esc_attr(get_the_author_meta('skill3', $user->ID))."'></input>
+
+            <label for='skill4'>Skill 4</label>
+            <input type='text' name='skill4' id='skill4' value='".esc_attr(get_the_author_meta('skill4', $user->ID))."'></input>
+
+            <br>
+            
+            <label for='skill1V'>Skill 1 Value</label>
+            <input type='text' name='skill1V' id='skill1V' value='".esc_attr(get_the_author_meta('skill1V', $user->ID))."'></input>
+
+            <label for='skill2V'>Skill 2 Value</label>
+            <input type='text' name='skill2V' id='skill2V' value='".esc_attr(get_the_author_meta('skill2V', $user->ID))."'></input>
+
+            <label for='skill3V'>Skill 3 Value</label>
+            <input type='text' name='skill3V' id='skill3V' value='".esc_attr(get_the_author_meta('skill3V', $user->ID))."'></input>
+
+            <label for='skill4V'>Skill 4 Value</label>
+            <input type='text' name='skill4V' id='skill4V' value='".esc_attr(get_the_author_meta('skill4V', $user->ID))."'></input>
+            
+        ";
+    }
+    add_action('show_user_profile', 'add_skills_fields');
+    add_action('edit_user_profile', 'add_skills_fields');
+
+    
+    /**
+     * Save user skills values into database
+     */
+    function save_skills_fields($user_id) {
+        update_user_meta($user_id, 'skill1', $_POST['skill1']);
+        update_user_meta($user_id, 'skill1V', $_POST['skill1V']);
+        update_user_meta($user_id, 'skill2', $_POST['skill2']);
+        update_user_meta($user_id, 'skill2V', $_POST['skill2V']);
+        update_user_meta($user_id, 'skill3', $_POST['skill3']);
+        update_user_meta($user_id, 'skill3V', $_POST['skill3V']);
+        update_user_meta($user_id, 'skill4', $_POST['skill4']);
+        update_user_meta($user_id, 'skill4V', $_POST['skill4V']);
+    }
+    add_action('personal_options_update' ,'save_skills_fields');
+    add_action('edit_user_profile_update', 'save_skills_fields');

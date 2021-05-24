@@ -9,7 +9,7 @@
         <div class="logo">
             <h1><a href="index.html">Selecao</a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" alt="" class="img-fluid"></a>-->
+            <a href="index.html"><img src="https://e1.pngegg.com/pngimages/427/957/png-clipart-drum-and-bass-labels-neosignal-logo.png" alt="" class="img-fluid"></a>
         </div>
 
         <?php get_template_part('nav'); ?>

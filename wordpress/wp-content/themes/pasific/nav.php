@@ -4,8 +4,8 @@
             <i class="fa fa-bars"></i>
         </button>
         <a class="navbar-brand page-scroll" href="#page-top">
-            <img src="assets/img/logo/logo-default.png" alt="logo">
-            Pasific H.
+            <img src="https://network.neosignal.de/neosignal/wp-content/uploads/sites/2/2018/06/neo_icon.png" style="width: 40px; margin-top: -10px" alt="logo">
+            Neosignal
         </a>
     </div>
 
