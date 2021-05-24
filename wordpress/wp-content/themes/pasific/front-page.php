@@ -33,7 +33,7 @@
                     </div>
                     
                     <div class="intro-direction">
-                        <a href="#welcome">
+                        <a href="#blogs">
                             <div class="mouse-icon"><div class="wheel"></div></div>
                         </a>
                     </div>
@@ -55,9 +55,9 @@
                 <div class="row mb25">
                     <h3 class="text-center">                            
                        Latest From Our Blog
-                        <small class="heading-desc text-lowercase">
-                            Lorem ipsum dolor sit amet consectetur adipiscing elit morbi sagittis.
-                        </small>
+                        <!-- <small class="heading-desc text-lowercase">
+                            Last posts published on our website
+                        </small> -->
                         <small class="heading heading-solid center-block"> </small>
                     </h3>
                 </div>

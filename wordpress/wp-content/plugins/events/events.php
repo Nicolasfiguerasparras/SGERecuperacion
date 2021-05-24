@@ -19,9 +19,53 @@
 
     // Registrar nuestro custom post type
     class Events {
-        function execute_actions() {
 
+        function execute_actions() {
+            add_action('init', array($this, 'my_custom_post_type')); // Indicamos que añada una acción al inicio llamando al método my_custom_post_type de la clase en la que estoy (en este caso, Events)
         }
+
+        function my_custom_post_type() {
+            $support = array(
+                'title',
+                'editor',
+                // 'excerpt',
+                // 'custom-fields',
+                'author',
+                'thumbnail',
+                'comments',
+            );
+
+            $labels = array(
+                'name'               =>    _x('Events', 'plural'),
+                'singular_name'      =>    _x('Event', 'singular'),
+                'name_admin_bar'     =>    _x('Events', 'admin bar'),
+                'menu_name'          =>    _x('Events', 'admin menu'),
+                'add_new'            =>    _x('Add new', 'add new'),
+                'add_new_item'       =>    __('Add new Event'),
+                'all_items'          =>    __('All events'),
+                'new_item'           =>    __('Add New Events'),
+                'search_items'       =>    __('Search Events'),
+                'not_found'          =>    __('No events found'),
+                'view_item'          =>    __('View Event'),
+            );
+            
+            $args = array(
+                'supports' => $support,
+                'labels' => $labels,
+                'label' => 'Events',
+                'public' => true,
+                'query_var' => true,
+                'rewrite' => array('slug' => 'events'),
+                'has_archive' => false,
+                'hierarchical' => false,
+                'menu_position' => 7,
+                'show_in_menu' => true,
+                'menu_icon' => 'dashicons-airplane',
+            );
+
+            register_post_type('events', $args);
+        }
+
     }
 
     // Si existe la clase, la instanciamos

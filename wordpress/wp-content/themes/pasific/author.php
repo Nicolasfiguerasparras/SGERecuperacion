@@ -13,12 +13,12 @@
     get_user_meta($curauth->ID, 'description', true); // Para sacar la descripción tenemos que hacerlo con el ID del autor como argumento en el método get_user_meta
 
     // Para evitar un fallo en el layout si el autor no tiene imagen
-    $my_path = get_user_meta($curauth->ID, 'picture', true);
+    $my_path = get_template_directory_uri().get_user_meta($curauth->ID, 'picture', true);
 
-    if(strlen($my_path) > 0){
+    if(does_url_exists($my_path) > 0){
         $profilepic = get_template_directory_uri().$my_path;
     }else{
-        $profilepic = get_template_directory_uri().'/ruta/de/defaultimage.jpg';
+        $profilepic = get_template_directory_uri().'/img/author-default.jpg';
     }
 
     // Get author's last posts
