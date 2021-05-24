@@ -3,7 +3,7 @@
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
             <i class="fa fa-bars"></i>
         </button>
-        <a class="navbar-brand page-scroll" href="#page-top">
+        <a class="navbar-brand page-scroll" href="<?php echo get_home_url(); ?>">
             <img src="https://network.neosignal.de/neosignal/wp-content/uploads/sites/2/2018/06/neo_icon.png" style="width: 40px; margin-top: -10px" alt="logo">
             Neosignal
         </a>
@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
         <ul class="nav navbar-nav">
             <li class="hidden"><a href="#page-top"></a></li>
-            <li><a href="#welcome">Welcome</a></li>
+            <li><a href="<?php echo get_home_url(); ?>">Home</a></li>
             <li><a href="#portfolioGrid">Works</a></li>
             <li><a href="#fact">Fact</a></li>
             <li><a href="#price">Price</a></li>
