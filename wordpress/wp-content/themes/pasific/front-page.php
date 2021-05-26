@@ -54,10 +54,7 @@
                 
                 <div class="row mb25">
                     <h3 class="text-center">                            
-                       Latest From Our Blog
-                        <!-- <small class="heading-desc text-lowercase">
-                            Last posts published on our website
-                        </small> -->
+                        Latest From Our Blog
                         <small class="heading heading-solid center-block"> </small>
                     </h3>
                 </div>
@@ -66,7 +63,6 @@
 
 
                     <?php
-
                         // Sacar los últimos 3 posts publicados --- APRENDER DE MEMORIA
                         $args = array(
                             'post_per_page' => 3,

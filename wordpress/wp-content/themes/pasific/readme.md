@@ -6,6 +6,11 @@ index paginación
 
 - Archives: Post por autor y posts más populares
 
+- Contador de visitas
+- Sidebar qué más hay que tener?
+- Archive entero
+
+
 
 
 

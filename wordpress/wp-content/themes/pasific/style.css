@@ -1,0 +1,15 @@
+.archiveBox {
+    border-radius: 5px; 
+    border-style: solid; 
+    min-height: 100px; 
+    padding: 10px;
+    background-color:aliceblue;
+}
+
+.archiveBox>li{
+    list-style: none;
+}
+
+.archiveBox>h3{
+    margin-top: -5px;
+}

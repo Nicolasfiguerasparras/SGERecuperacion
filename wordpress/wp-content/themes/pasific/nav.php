@@ -13,7 +13,7 @@
         <ul class="nav navbar-nav">
             <li class="hidden"><a href="#page-top"></a></li>
             <li><a href="<?php echo get_home_url(); ?>">Home</a></li>
-            <li><a href="#portfolioGrid">Works</a></li>
+            <li><a href="http://www.google.com">Works</a></li>
             <li><a href="#fact">Fact</a></li>
             <li><a href="#price">Price</a></li>
             <li><a href="#service">Service</a></li>
