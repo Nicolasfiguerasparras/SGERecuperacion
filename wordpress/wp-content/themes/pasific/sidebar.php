@@ -42,29 +42,18 @@
             Popular Tags
             <span class="heading-divider mt10"></span>
         </h5>
-        <ul class="tag">
-            <!-- <li><a href="#">Jacket</a></li>
-            <li><a href="#">Accesories</a></li>
-            <li><a href="#">Jewelley</a></li>
-            <li><a href="#">iWatch</a></li>
-            <li><a href="#">iPad</a></li>
-            <li><a href="#">Macbook</a></li>
-            <li><a href="#">Apple</a></li> -->
-            <?php
-                $tags = list_tags(10);
-                $html = "<ul class='tag'>";
-                foreach($tags as $tag) {
-                    $tag_link = $get_tag_link($tag->term_id);
-                    $tag_name = $tag->name;
-                    $html .= "<li><a href='$tag_link'>$tag_name</a></li>";
-                }
-                // echo list_tags(10);
-                echo $html;
-            ?>
-        </ul>
 
+        <?php
+            $html = "<ul class='tag'>";
+            foreach(get_tags() as $tag) {
+                $tag_link = get_tag_link($tag->term_id);
+                $tag_name = $tag->name;
+                $html .= "<li><a href='$tag_link'>$tag_name</a></li>";
+            }
+            $html .= "</ul>";
+            echo $html;
+        ?>
         
-            
     </div>
     
     
