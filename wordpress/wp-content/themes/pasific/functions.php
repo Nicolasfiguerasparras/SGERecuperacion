@@ -251,3 +251,24 @@
         curl_close($ch);
         return $status;
     }
+
+    // -------------------- COMENTARIOS -------------------- //
+
+    /**
+     * Customizar la plantilla de comentarios
+     */
+
+    function customize_comments_template($fields) {
+        $aux = array(); // Creamos un array auxiliar para ir añadiendole los campos que queramos
+
+        // Vamos añadiendo los campos de $field que queramos a nuestro array auxiliar
+        array_push($aux, $fields['author']);
+        array_push($aux, $fiels['email']);
+        array_push($aux, $fields['comment']);
+        array_push($aux, $fiels['cookies']);
+
+        $aux['consent'] = 'aqui va el html del checkbox del consentimiento de datos';
+
+        return $aux;
+    }
+    add_action('comment_form_fields', 'customize_comments_template');
