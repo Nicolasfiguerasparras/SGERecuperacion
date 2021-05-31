@@ -54,8 +54,17 @@
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="content-box content-box-center archiveBox">
                             <h3 class="text-center">Tags</h3>
-                            <?php echo list_tags(10);
-                            wp_tag_cloud(); ?>
+                            <?php 
+                            // echo list_tags(10);
+                            // wp_tag_cloud(); 
+                            
+                            $html = "";
+            foreach(get_tags() as $tag) {
+                $tag_link = get_tag_link($tag->term_id);
+                $tag_name = $tag->name;
+                $html .= "<li><a href='$tag_link'>$tag_name</a></li><br>";
+            }
+            echo $html;?>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4 col-xs-12">
