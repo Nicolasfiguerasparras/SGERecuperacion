@@ -158,6 +158,16 @@
             }
         }
 
+        function events_activation(){
+            // Reescribir los permalinks - para que se actualicen con el custom post type
+            flush_rewrite_rules();
+            // Si tenemos que hacer algo con la BBDD
+        }
+
+        function events_deactivation(){
+            // Si tenemos que hacer algo con la BBDD
+        }
+
     }
 
     // Si existe la clase, la instanciamos
@@ -166,3 +176,6 @@
         // Una vez que la instanciamos, ejecutamos el método de la clase que me registra el custom post type
         $events->execute_actions();
     }
+    
+    register_activation_hook(__FILE__, array($events, 'events_activation'));
+    register_deactivation_hook(__FILE__, array($events, 'events_deactivation'));

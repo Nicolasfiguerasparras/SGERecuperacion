@@ -252,23 +252,53 @@
         return $status;
     }
 
-    // -------------------- COMENTARIOS -------------------- //
-
     /**
      * Customizar la plantilla de comentarios
      */
-
     function customize_comments_template($fields) {
         $aux = array(); // Creamos un array auxiliar para ir añadiendole los campos que queramos
 
         // Vamos añadiendo los campos de $field que queramos a nuestro array auxiliar
         array_push($aux, $fields['author']);
-        array_push($aux, $fiels['email']);
+        array_push($aux, $fields['email']);
         array_push($aux, $fields['comment']);
-        array_push($aux, $fiels['cookies']);
+        array_push($aux, $fields['cookies']);
 
         $aux['consent'] = 'aqui va el html del checkbox del consentimiento de datos';
 
         return $aux;
     }
     add_action('comment_form_fields', 'customize_comments_template');
+
+    /**
+     * Customizar el login de WP
+     */
+    function customize_login() {
+        ?>
+            <style>
+                /* Cambiamos el logo del login form */
+                #login h1 a, .login h1 a {
+                    width: 50%;
+                    height: 160px;
+                    
+                    background-image: url("<?php echo get_template_directory_uri().'/img/logo.png' ?>");
+                    background-size: cover;
+                    background-position: cente center;
+                    backgorund-repeat: no-repeat;
+                }
+
+                .login {
+                    background-color: yellow;
+                }
+            </style>
+        <?php
+    }
+    add_action('login_enqueue_scripts', 'customize_login');
+
+    /**
+     * Customizar la url a la que dirige el logo del login
+     */
+    function customize_logo_url() {
+        return home_url();
+    }
+    add_fiilter('login_headerurl', 'customize_logo_url');
