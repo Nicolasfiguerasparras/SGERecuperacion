@@ -57,11 +57,11 @@
     </div>
     
     
-    <!-- Popular Products
+    <!-- Popular Posts
     ===================================== -->
     <div class="mt25 pr25 pl25 clearfix">
         <h5 class="mt25">
-            Popular Post
+            Popular Posts
             <span class="heading-divider mt10"></span>
         </h5>
         
@@ -95,6 +95,37 @@
         ?>
             
     </div>
+
+    <!-- Authors
+    ===================================== -->
+    <div class="mt25 pr25 pl25 clearfix">
+        <h5 class="mt25">
+            Authors
+            <span class="heading-divider mt10"></span>
+        </h5>
+        <ul class="shop-sidebar pl25">
+            <?php wp_list_authors('hide_empty=0&optioncount=1'); ?>
+        </ul>
+        
+    </div>
+
+    <!-- Pages
+    ===================================== -->
+    <div class="mt25 pr25 pl25 clearfix">
+        <h5 class="mt25">
+            Pages
+            <span class="heading-divider mt10"></span>
+        </h5>
+        <ul class="shop-sidebar pl25">
+            <?php wp_list_pages(
+                array(
+                    'title_li' => '',
+                    'except' => 3
+                )
+            ); ?>
+        </ul>
+        
+    </div>
     
     
     <!-- Archieve
@@ -105,12 +136,15 @@
             <span class="heading-divider mt10"></span>
         </h5>                            
         <ul class="shop-sidebar pl25">
-            <li class="active"><a href="#">January<span class="badge badge-pasific pull-right">14</span></a></li>
+            <!-- <li class="active"><a href="#">January<span class="badge badge-pasific pull-right">14</span></a></li>
             <li><a href="#">February<span class="badge badge-pasific pull-right">125</span></a></li>
             <li><a href="#">March<span class="badge badge-pasific pull-right">350</span></a></li>
             <li><a href="#">April<span class="badge badge-pasific pull-right">520</span></a></li>
             <li><a href="#">May<span class="badge badge-pasific pull-right">1,290</span></a></li>
-            <li><a href="#">June<span class="badge badge-pasific pull-right">7</span></a></li>
+            <li><a href="#">June<span class="badge badge-pasific pull-right">7</span></a></li> -->
+            <?php
+                wp_get_archives();
+            ?>
         </ul>
         
     </div>

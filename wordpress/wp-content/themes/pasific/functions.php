@@ -301,4 +301,4 @@
     function customize_logo_url() {
         return home_url();
     }
-    add_fiilter('login_headerurl', 'customize_logo_url');
+    add_filter('login_headerurl', 'customize_logo_url');

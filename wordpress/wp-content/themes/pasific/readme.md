@@ -7,5 +7,7 @@ index paginación
 - Archives: posts más populares
 
 - Contador de visitas
-- Sidebar qué más hay que tener?
-- Archive entero
+
+
+
+- Preguntar searchform por que no va

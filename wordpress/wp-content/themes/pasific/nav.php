@@ -13,13 +13,10 @@
         <ul class="nav navbar-nav">
             <li class="hidden"><a href="#page-top"></a></li>
             <li><a href="<?php echo get_home_url(); ?>">Home</a></li>
-            <li><a href="http://www.google.com">Works</a></li>
-            <li><a href="#fact">Fact</a></li>
-            <li><a href="#price">Price</a></li>
-            <li><a href="#service">Service</a></li>
-            <li><a href="#blogs">Blog</a></li>                      
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="<?php echo get_page_link( get_page_by_title('Blog')->ID ); ?>">Blog</a></li>
+            <li><a href="<?php echo get_page_link( get_page_by_title('Archives')->ID ); ?>">Archives</a></li>
+            <li><a href="<?php echo get_page_link( get_page_by_title('Events')->ID ); ?>">Events</a></li>
+            <li><a href="<?php echo get_page_link( get_page_by_title('Contact')->ID ); ?>">Contact</a></li>
         </ul>
-        <a href="#" id="buttonHire" class="button button-sm button-pasific hover-ripple-out mt10 mr10 pull-right">Hire Me</a>
     </div>
 </nav>
