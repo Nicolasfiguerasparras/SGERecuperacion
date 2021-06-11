@@ -118,6 +118,20 @@
                             else:
                                 'No posts published yet...';
                             endif;
+                            wp_reset_query();
+                        ?>
+
+                        <!-- PAGINACIÓN -->
+                        <?php
+                            // Éste método solo funciona con el loop por defecto de WP
+                            the_posts_pagination(
+                                array(
+                                    'mid_size' => 2,
+                                    'prev_text' => 'Previous Page',
+                                    'next_text' => 'Next Page',
+                                    'screen_reader_text' => 'Pages:'
+                                )
+                            );
                         ?>
                         
                         <div class="row">

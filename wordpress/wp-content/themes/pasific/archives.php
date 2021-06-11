@@ -80,6 +80,59 @@
                             ?>
                         </div>
                     </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="content-box content-box-center archiveBox">
+                            <h3 class="text-center">Most popular posts</h3>
+                            <?php
+                                $args = array(
+                                    'meta_key' => 'numvisits',
+                                    'orderby' => 'meta_value_num', // Por defecto en DESC
+                                );
+
+                                $popular = new WP_Query($args);
+                                
+                                if($popular->have_posts()):
+                                    while($popular->have_posts()):
+                                        $popular->the_post();
+                            ?>
+                            <!-- <ul> -->
+                                <li><a href='<?php echo get_permalink($popular->ID); ?>''><?php echo $popular->post_title; ?> (<?php echo get_num_visits($popular->ID); //print_r($popular); ?>)</a></li>
+                            <!-- </ul> -->
+
+                            <?php
+                                    endwhile;
+                                endif;
+                                wp_reset_query();
+                            ?>
+                        </div>
+
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <div class="content-box content-box-center archiveBox">
+                            <h3 class="text-center">Most commented posts</h3>
+                            <?php
+                                $args = array(
+                                    'orderby' => 'comment_count', // Por defecto en DESC
+                                );
+
+                                $mostcommented = new WP_Query($args);
+                                
+                                if($mostcommented->have_posts()):
+                                    while($mostcommented->have_posts()):
+                                        $mostcommented->the_post();
+                            ?>
+                            <!-- <ul> -->
+                                <li><a href='<?php echo get_permalink($mostcommented->ID); ?>''><?php echo $mostcommented->post_title; ?> (<?php echo get_comment_number($mostcommented->ID); //print_r($popular); ?>)</a></li>
+                            <!-- </ul> -->
+
+                            <?php
+                                    endwhile;
+                                endif;
+                                wp_reset_query();
+                            ?>
+                        </div>
+                    </div>
+
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="content-box content-box-center archiveBox">
                             <h3 class="text-center">Categories</h3>

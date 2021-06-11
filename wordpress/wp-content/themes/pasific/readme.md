@@ -11,3 +11,5 @@ index paginación
 
 
 - Preguntar searchform por que no va
+
+- Pedir contador de comentarios (añadir nuevo comentario)

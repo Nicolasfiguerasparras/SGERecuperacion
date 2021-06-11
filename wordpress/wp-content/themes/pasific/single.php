@@ -1,6 +1,7 @@
 <?php 
     get_header();
     the_post(); // Con esto accedemos a todas las funciones del post
+    add_num_visits($post->ID); // Añadimos una visita al post que estamos visitando
 ?>
         
         <!-- Page Loader
@@ -83,14 +84,14 @@
                                 <div><i class="fa fa-calendar"></i><?php the_date(); ?></div> | 
                                 <div><i class="fa fa-pencil"></i><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php the_author(); ?></a></div> | 
                                 <div><i class="fa fa-comment-o"></i><a href="#">90 Comments</a></div> | 
-                                <div><a href="#"><i class="fa fa-thumbs-o-up"></i></a>150 Likes</div> | 
-                                <div>
+                                <div><a href="#"><i class="fa fa-eye"></i></a><?php echo get_num_visits($post->ID); ?></div> | 
+                                <!-- <div>
                                     Share:  <a href="#"><i class="fa fa-facebook-official"></i></a>
                                             <a href="#"><i class="fa fa-twitter"></i></a>
                                             <a href="#"><i class="fa fa-linkedin"></i></a>
                                             <a href="#"><i class="fa fa-google-plus"></i></a>
                                             <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
+                                </div> -->
                             </div>
 
                             <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Image Carousel" class="img-responsive">
@@ -173,7 +174,7 @@
                         
                         <!-- Comments template -->
                         <div class="blog-post-comment-container">
-                            <h5><i class="fa fa-comments-o mb25"></i> 20 Comments</h5>
+                            <h5><i class="fa fa-comments-o mb25"></i> <?php comments_number('No comments', '1 Comment', '% Comments'); ?></h5>
 
                             <?php comments_template(); ?>
                             

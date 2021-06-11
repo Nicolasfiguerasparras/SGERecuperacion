@@ -1,9 +1,9 @@
 .archiveBox {
     border-radius: 5px; 
-    border-style: solid; 
+    /* border-style: solid;  */
     min-height: 100px; 
     padding: 10px;
-    background-color:aliceblue;
+    /* background-color:aliceblue; */
 }
 
 .archiveBox>li{

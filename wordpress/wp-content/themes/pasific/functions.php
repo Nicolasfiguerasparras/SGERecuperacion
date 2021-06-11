@@ -302,3 +302,101 @@
         return home_url();
     }
     add_filter('login_headerurl', 'customize_logo_url');
+
+    /**
+     * Crear una nueva columna en el area de comentarios en el back-end 
+     */
+    function add_column_consent($columns) {
+        // TODO
+        $columns = array(
+            'ob' => '<input type="checkbox">',
+            'author' => 'Author',
+            'comment' => 'Comment',
+            'consent' => 'Consent',
+            'response' => 'In Response',
+            'date' => 'Submitted on',
+        );
+
+        return $columns;
+    }
+    add_action('manage_edit-comment_columns', 'add_column_consent');
+
+    /**
+     * Guardar el campo politica de privacidad en la BBDD
+     */
+    function save_consent($comment_id){
+        $consent_v = $_POST['consent'];
+
+        if($consent_v == true){
+            $consent = "He aceptado la política de privacidad y consiento la publicación del comentario";
+        }else{
+            $consent = "No he aceptado la política de privacidad";
+        }
+
+        add_comment_meta($comment_id, 'consent', $consent, true);
+    }
+    add_action('comment_post', 'save_consent');
+
+    /**
+     * Mostrar la columna de consentimiento
+     */
+    function display_consent($column, $comment_id) {
+        if($column == 'consent') {
+            echo get_comment_meta($comment_id, 'consent', true);
+        }
+    }
+    add_action('manage_comments_custom_column', 'display_consent', 1, 2);
+
+    /**
+     * Mostrar el número de comentarios
+     */
+    function get_comment_number($post_id) {
+        $numcomments = get_post_meta($post_id, 'comment_number', true);
+
+        if($numcomments == 1){
+            $sufix = " Comment";
+        }else{
+            $sufix = " Comments";
+        }
+
+        return $numcomments.$sufix;
+    }
+
+    /**
+     * Contador de visitas
+     */
+    function get_num_visits($post_id) {
+        $numvisits = get_post_meta($post_id, 'numvisits', true);
+
+        if($numvisits == 1){
+            $sufix = " Visit";
+        }else{
+            $sufix = " Visits";
+        }
+
+        return $numvisits.$sufix;
+    }
+
+    /**
+     * Añadir visita a post
+     */
+    function add_num_visits($post_id) {
+        $numvisits = 1;
+
+        // Chequear si existe ya el contador de visitas, en caso de que no, lo creamos
+        if(!add_post_meta($post_id, 'numvisits', $numvisits, true)){
+            
+            // Solo si estamos en la plantilla single
+            if(is_single()){
+                // El contador ya existe, le tenemos que añadir 1
+                $numvisits = get_post_meta($post_id, 'numvisits', true) + 1;
+
+                // Actualizamos el nuevo valor del contador de visitas
+                update_post_meta($post_id, 'numvisits', $numvisits);
+            }
+
+            
+        }
+
+        return $numvisits;
+    }
