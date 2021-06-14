@@ -56,7 +56,7 @@ $(document).ready(function() {
 	----------------------------------------------------------- */
     $(function(){
         "use strict";
-        $(".navbar-op ul li a, .navbar-op a.navbar-brand, .intro-direction a, a.go-to-top").on('click', function(event) {    
+        $(".intro-direction a, a.go-to-top").on('click', function(event) {    
             event.preventDefault();
             var hash = this.hash;
 

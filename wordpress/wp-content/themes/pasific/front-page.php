@@ -117,7 +117,7 @@
         
         <!-- Welcome Area
         ===================================== -->
-        <div id="welcome" class="pt75">
+        <!-- <div id="welcome" class="pt75">
             <div class="container">
                 <div class="row mb30">
                     <h3 class="text-center">                            
@@ -168,12 +168,12 @@
                     
                 </div>
             </div>
-        </div>
+        </div> -->
                    
         
         <!-- Portfolio Area
         ===================================== -->
-        <div id="portfolioGrid">
+        <!-- <div id="portfolioGrid">
             <div class="pt50">&nbsp;</div>
             <div class="container pb75">
                 <div class="row">
@@ -258,12 +258,12 @@
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>     -->
         
         
         <!-- Fun Fact Area
         ===================================== -->
-        <div id="fact" class="pt75 pb75">
+        <!-- <div id="fact" class="pt75 pb75">
             <div class="container">
                 
                 <div class="row">
@@ -331,12 +331,12 @@
                 </div>
                 
             </div>
-        </div>
+        </div> -->
         
         
         <!-- Price Area
         ===================================== -->
-        <div id="price" class="bg-gray pt75 pb75">
+        <!-- <div id="price" class="bg-gray pt75 pb75">
             <div class="container text-center">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 text-center mb50">
@@ -426,12 +426,12 @@
 				</div>
                 
             </div>
-        </div>
+        </div> -->
                 
        
         <!-- General Content Area
         ===================================== -->
-        <div id="general-content-1" class="pt75 pb50">
+        <!-- <div id="general-content-1" class="pt75 pb50">
             <div class="container">
                 <div class="row">
                     
@@ -455,12 +455,12 @@
                     
                 </div>
             </div>
-        </div>
+        </div> -->
         
         
         <!-- General Content Area
         ===================================== -->
-        <div id="general-content-2" class="pt50 pb50 bt-solid-1">
+        <!-- <div id="general-content-2" class="pt50 pb50 bt-solid-1">
             <div class="container">
                 <div class="row">
                     
@@ -481,17 +481,14 @@
                             <div class="clearfix"></div>
                         </div>
                     </div>
-                    
-                    
-                    
                 </div>
             </div>
-        </div>
+        </div> -->
         
         
         <!-- Skill Area
         ===================================== -->
-        <div id="skills"  class="pt50 pb50" style="background:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg/bg-parallax-1.jpg)">
+        <!-- <div id="skills"  class="pt50 pb50" style="background:url(<?php echo get_template_directory_uri(); ?>/assets/img/bg/bg-parallax-1.jpg)">
             <div class="container">
                 <div class="row">
                     <h3 class="text-center color-light mt35 mb35">My Coding Skills</h3>
@@ -525,12 +522,12 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
                 
         
         <!-- Service Area
         ===================================== -->
-        <div id="service" class="pt75">
+        <!-- <div id="service" class="pt75">
             <div class="container">
                 
                 <div class="row">
@@ -592,12 +589,12 @@
                 </div>
                 
             </div>
-        </div>
+        </div> -->
         
         
         <!-- Clients Area
         ===================================== -->
-        <div id="client" class="bg-dark2 pt50 pb25 bb-solid-1">
+        <!-- <div id="client" class="bg-dark2 pt50 pb25 bb-solid-1">
             <div class="container">
 
                 <div class="row">
@@ -624,12 +621,12 @@
                 </div>
                 
             </div>
-        </div>
+        </div> -->
         
             
         <!-- Contact Us Area
         =====================================-->
-        <div id="contact" class="pt75 pb75 bt-solid-1">
+        <!-- <div id="contact" class="pt75 pb75 bt-solid-1">
             <div class="container">
                 
                 <div class="row">
@@ -647,31 +644,24 @@
                 <div class="row mt50">
                     <form name="contactform" id="contactForm" method="post" action="http://myboodesign.com/pasific/assets/php/send.php">
                         
-                        <!-- sender name start -->
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="form-group">
                                 <input type="text" name="senderName" id="senderName" class="input-md input-rounded form-control" placeholder="fullname" maxlength="100" required>
                             </div>
                         </div>
-                        <!-- sender name end -->
                         
-                        <!-- sender email start -->
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="form-group">
                                 <input type="email" name="senderEmail" id="senderEmail" class="input-md input-rounded form-control" placeholder="email address" maxlength="100" required>
                             </div>
                         </div>
-                        <!-- sender email end -->
                         
-                        <!-- sender website start -->
                         <div class="col-md-3 col-sm-3 col-xs-6">                            
                             <div class="form-group">
                                 <input type="url" name="senderWebsite" id="senderWebsite" class="input-md input-rounded form-control" placeholder="http://" maxlength="100">
                             </div>
                         </div>
-                        <!-- sender website end -->
                         
-                        <!-- security check human start -->
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <div class="form-group">
                                 <input type="text" name="senderHuman" id="senderHuman" class="input-md input-rounded form-control" placeholder="" required>
@@ -679,7 +669,6 @@
                                 <input type="hidden" name="checkHuman_b" id="checkHuman_b">
                             </div>
                         </div>
-                        <!-- security check human end -->
                         
                         <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                             <textarea class="form-control" name="message" id="message" rows="7" required></textarea>
@@ -695,18 +684,17 @@
                 </div>
                 
             </div>
-        </div>       
+        </div>        -->
         
         
         <!-- Testimonial Area
         ===================================== -->
-        <div id="testimonial" class="bg-gray pt50 pb25 bb-solid-1">
+        <!-- <div id="testimonial" class="bg-gray pt50 pb25 bb-solid-1">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
                         <div id="owlSectionThreeItem" class="owl-carousel">
 
-                            <!-- Testimonial Item -->
                             <div class="testimonial testimonial-center">
                                 <div class="testimonial-header">
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-1.jpg" alt="testimonial author" class="img-responsive img-circle">
@@ -722,7 +710,6 @@
                                 </div>
                             </div>
 
-                            <!-- Testimonial Item -->
                             <div class="testimonial testimonial-center">
                                 <div class="testimonial-header">
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-2.jpg" alt="testimonial author" class="img-responsive img-circle">
@@ -738,7 +725,6 @@
                                 </div>
                             </div>
 
-                            <!-- Testimonial Item -->
                             <div class="testimonial testimonial-center">
                                 <div class="testimonial-header">
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-3.jpg" alt="testimonial author" class="img-responsive img-circle">
@@ -754,7 +740,6 @@
                                 </div>
                             </div>
 
-                            <!-- Testimonial Item -->
                             <div class="testimonial testimonial-center">
                                 <div class="testimonial-header">
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-1.jpg" alt="testimonial author" class="img-responsive img-circle">
@@ -770,7 +755,6 @@
                                 </div>
                             </div>
 
-                            <!-- Testimonial Item -->
                             <div class="testimonial testimonial-center">
                                 <div class="testimonial-header">
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-2.jpg" alt="testimonial author" class="img-responsive img-circle">
@@ -786,7 +770,6 @@
                                 </div>
                             </div>
 
-                            <!-- Testimonial Item -->
                             <div class="testimonial testimonial-center">
                                 <div class="testimonial-header">
                                     <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/photo-3.jpg" alt="testimonial author" class="img-responsive img-circle">
@@ -809,12 +792,12 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
         
         
         <!-- Newsletter Area
         =====================================-->
-        <div id="newsletter" class="bg-dark2 pt75 pb75">
+        <!-- <div id="newsletter" class="bg-dark2 pt75 pb75">
             <div class="container">
                 <div class="row">
                     
@@ -834,7 +817,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <?php
             get_footer();

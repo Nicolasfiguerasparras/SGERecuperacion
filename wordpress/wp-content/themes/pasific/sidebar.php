@@ -20,12 +20,6 @@
             <span class="heading-divider mt10"></span>
         </h5>                            
         <ul class="shop-sidebar pl25">
-            <!-- <li class="active"><a href="#">Fashion<span class="badge badge-pasific pull-right">14</span></a></li>
-            <li><a href="#">Sport<span class="badge badge-pasific pull-right">125</span></a></li>
-            <li><a href="#">Electronic<span class="badge badge-pasific pull-right">350</span></a></li>
-            <li><a href="#">Jewellery<span class="badge badge-pasific pull-right">520</span></a></li>
-            <li><a href="#">Food<span class="badge badge-pasific pull-right">1,290</span></a></li>
-            <li><a href="#">Furniture<span class="badge badge-pasific pull-right">7</span></a></li> -->
             <?php
                 wp_list_categories('title_li');
             ?>
@@ -65,23 +59,6 @@
             <span class="heading-divider mt10"></span>
         </h5>
         
-        <!-- <div class="blog-sidebar-popular-post-container">
-            <img src="assets/img/blog/img-blog-1.jpg" alt="" class="img-responsive pull-left">
-            <h6><a href="#">Lorem Ipsum Dolor</a></h6>
-            <span class="text-gray">Jan 24th, 2016</span>
-        </div>
-        
-        <div class="blog-sidebar-popular-post-container">
-            <img src="assets/img/blog/img-blog-3.jpg" alt="" class="img-responsive pull-left">
-            <h6><a href="#">nisi ut aliquip</a></h6>
-            <span class="text-gray">Jan 24th, 2016</span>
-        </div>
-        
-        <div class="blog-sidebar-popular-post-container">
-            <img src="assets/img/blog/img-blog-2.jpg" alt="" class="img-responsive pull-left">
-            <h6><a href="#">tempor incididunt</a></h6>
-            <span class="text-gray">Jan 24th, 2016</span>
-        </div> -->
         <?php
             wp_get_archives(
                 array(
@@ -136,12 +113,6 @@
             <span class="heading-divider mt10"></span>
         </h5>                            
         <ul class="shop-sidebar pl25">
-            <!-- <li class="active"><a href="#">January<span class="badge badge-pasific pull-right">14</span></a></li>
-            <li><a href="#">February<span class="badge badge-pasific pull-right">125</span></a></li>
-            <li><a href="#">March<span class="badge badge-pasific pull-right">350</span></a></li>
-            <li><a href="#">April<span class="badge badge-pasific pull-right">520</span></a></li>
-            <li><a href="#">May<span class="badge badge-pasific pull-right">1,290</span></a></li>
-            <li><a href="#">June<span class="badge badge-pasific pull-right">7</span></a></li> -->
             <?php
                 wp_get_archives();
             ?>

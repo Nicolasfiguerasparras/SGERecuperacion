@@ -81,17 +81,10 @@
                         <div class="blog-three-mini">
                             <h2 class="color-dark"><a href="#"><?php the_title(); ?></a></h2>
                             <div class="blog-three-attrib">
-                                <div><i class="fa fa-calendar"></i><?php the_date(); ?></div> | 
-                                <div><i class="fa fa-pencil"></i><a href="<?php echo esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ); ?>"><?php the_author(); ?></a></div> | 
+                                <i class="fa fa-calendar"></i><?php the_date(); ?> | 
+                                <i class="fa fa-pencil"></i><?php the_author_posts_link(); ?> | 
                                 <div><i class="fa fa-comment-o"></i><a href="#">90 Comments</a></div> | 
                                 <div><a href="#"><i class="fa fa-eye"></i></a><?php echo get_num_visits($post->ID); ?></div> | 
-                                <!-- <div>
-                                    Share:  <a href="#"><i class="fa fa-facebook-official"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                            <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div> -->
                             </div>
 
                             <img src="<?php echo get_the_post_thumbnail_url(); ?>" alt="Image Carousel" class="img-responsive">
@@ -102,73 +95,54 @@
                                 <?php
                                 $tags = get_the_tags($post->ID);
                                     foreach($tags as $tag) {
-                                        echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> '; // Meter en una variable get_the_tags
+                                        echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> ';
                                     }
                                 ?>
                             </div>
                             
                         </div>
                         
+                        <!-- Related posts -->
+                        <?php
+                            $related_query = new WP_Query(
+                                                            array(
+                                                                'post_type' => 'post',
+                                                                'category__in' => wp_get_post_categories(get_the_ID()),
+                                                                'post__not_in' => array(get_the_ID()),
+                                                                'posts_per_page' => 3,
+                                                                'orderby' => 'date',
+                                                            )
+                                                        );
+                            if($related_query->have_posts()):
+                        ?>
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h5 class="bg-gray pt5 bp10 pl10">Related Articles</h5>
                             </div>
                             <!--Blog Post -->
+                            <?php
+                                while($related_query->have_posts()):
+                                    $related_query->the_post();
+                            ?>
                             <div class="col-md-4 col-sm-6 col-xs-12 mb50">
                                 <div class="blog-three">
-                                    <h4 class="blog-title"><a href="#">Amazing Blog Post Title</a></h4>
+                                    <h4 class="blog-title"><a href="<?php echo the_permalink(); ?>"><?php the_title(); ?></a></h4>
                                     <div class="blog-three-attrib">
-                                        <span class="icon-calendar"></span>Dec 15 2015 | 
-                                        <span class=" icon-pencil"></span><a href="#">Harry Boo</a>
+                                        <span class="icon-calendar"></span><?php echo get_the_date(); ?> | 
+                                        <span class=" icon-pencil"></span><a href="#"><?php the_author(); ?></a>
                                     </div>
-                                    <img src="assets/img/blog/img-blog-1.jpg" class="img-responsive" alt="image">
+                                    <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="img-responsive" alt="image">
                                     <p class="mt25">
-                                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.                            
+                                        <?php the_excerpt(); ?>                          
                                     </p>
                                     <a href="#" class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
                                 </div>
                             </div>
+                            <?php
+                                endwhile;
+                            endif;
+                            ?>
 
-                            <!--Blog Post -->
-                            <div class="col-md-4 col-sm-6 col-xs-12 mb50">
-                                <div class="blog-three">
-                                    <h4 class="blog-title"><a href="#">Amazing Blog Post Title</a></h4>
-                                    <div class="blog-three-attrib">
-                                        <span class="icon-calendar"></span>Dec 15 2015 | 
-                                        <span class=" icon-pencil"></span><a href="#">Harry Boo</a>
-                                    </div>
-                                    <img src="assets/img/blog/img-blog-2.jpg" class="img-responsive" alt="image">
-                                    <p class="mt25">
-                                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.                            
-                                    </p>
-                                    <a href="#" class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                            
-                            <!--Blog Post -->
-                            <div class="col-md-4 col-sm-6 col-xs-12 mb50">
-                                <div class="blog-three">
-                                    <h4 class="blog-title"><a href="#">Amazing Blog Post Title</a></h4>
-                                    <div class="blog-three-attrib">
-                                        <span class="icon-calendar"></span>Dec 15 2015 | 
-                                        <span class=" icon-pencil"></span><a href="#">Harry Boo</a>
-                                    </div>
-                                    <img src="assets/img/blog/img-blog-3.jpg" class="img-responsive" alt="image">
-                                    <p class="mt25">
-                                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos.                            
-                                    </p>
-                                    <a href="#" class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                                                
-                        
-                        <div class="blog-post-author mb50 pt30 bt-solid-1">
-                            <img src="assets/img/other/photo-1.jpg" class="img-circle" alt="image">
-                            <span class="blog-post-author-name">John Boo</span> <a href="https://twitter.com/booisme"><i class="fa fa-twitter"></i></a>
-                            <p>
-                                Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
-                            </p>
                         </div>
                         
                         
