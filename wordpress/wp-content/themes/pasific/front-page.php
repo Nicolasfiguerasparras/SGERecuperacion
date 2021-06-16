@@ -16,14 +16,14 @@
         
         <!-- Intro Area
         ===================================== -->
-        <header class="intro pt75 pb100 parallax-window" data-parallax="scroll" data-speed="0.5" data-position="top right" data-image-src="https://www.shbarcelona.es/blog/es/wp-content/uploads/2016/08/discotecas-barcelona-drum-and-bass-810x540.jpg">
+        <header class="intro pt75 pb100 parallax-window" data-parallax="scroll" data-speed="0.5" data-position="top right" data-image-src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Audio%2C_Beats_for_Love_2019_01.jpg">
             <div class="intro-body">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-left">
-                            <div class="titleDegrate"><h1 class="brand-heading font-pacifico text-capitalize fs-75 color-light animated" data-animation="fadeInUp" data-animation-delay="100" style="color: black !important; font-family: 'Open Sans', sans-serif !important">Welcome to Studio DnB</h1></div>
+                            <div class="titleDegrate"><h1 class="brand-heading font-pacifico text-capitalize fs-75 color-light animated" data-animation="fadeInUp" data-animation-delay="100" style="color: white !important; font-family: 'Open Sans', sans-serif !important">Welcome to Studio DnB</h1></div>
                             <p class="intro-text text-uppercase color-light mb50 animated" data-animation="fadeInUp" data-animation-delay="200">
-                                <span class="text-capitalize" style="color: black !important; font-family: 'Open Sans', sans-serif !important; font-weight: normal !important;">
+                                <span class="text-capitalize" style="color: white !important; font-family: 'Open Sans', sans-serif !important; font-weight: normal !important;">
                                     A DnB magazine to keep you up to date<br>
                                     on the latest discoveries<br>
                                     in this emerging genre

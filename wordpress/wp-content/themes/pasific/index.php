@@ -25,13 +25,12 @@
             <div class="container">
                 <div class="row mt20 mb30">
                     <div class="col-md-6 text-left">
-                        <h3 class="color-light text-uppercase animated" data-animation="fadeInUp" data-animation-delay="100">Blog Posts<small class="color-light alpha7">some notes.</small></h3>
+                        <h3 class="color-light text-uppercase animated" data-animation="fadeInUp" data-animation-delay="100">Blog Posts<small class="color-light alpha7">our entries.</small></h3>
                     </div>
                     <div class="col-md-6 text-right pt35">
                         <ul class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Blog Page</a></li>
-                            <li>Blog Post</li>
+                            <li><a href="<?php echo home_url(); ?>">Home</a></li>
+                            <li>Blog Page</li>
                         </ul>
                     </div>
                 </div>
@@ -44,6 +43,37 @@
         ===================================== -->
         <div id="blog" class="pt20 pb50">
             <div class="container">
+
+                <div class="row blog-masonry-3col">
+                    
+                    <!-- Blog Item -->
+                    <div class="col-md-4 col-sm-6 col-xs-12 blog-masonry-item mb25">
+                        <div class="blog-one">
+                            <div class="blog-one-header">
+                                <img src="assets/img/blog/img-blog-1.jpg" class="img-responsive" alt="image blog">
+                            </div>
+                            <div class="blog-one-attrib">                                
+                                <img src="assets/img/other/photo-1.jpg" alt="photo blog" class="blog-author-photo">
+                                <span class="blog-author-name">Harry Boo</span>                                                           
+                                <span class="blog-category bg-green"><a href="#">News</a></span> 
+                                <span class="blog-date">PEB. 14 2016</span>                                                          
+                            </div>
+                            <div class="blog-one-body">
+                                <h4 class="blog-title"><a href="#">Amazing Blog Post One</a></h4>
+                                <p class="">
+                                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
+                                </p>
+                            </div>
+                            <div class="blog-one-footer">
+                                <a href="#">Read More</a>
+                                <i class="fa fa-heart"></i>59 Likes
+                                <i class="fa fa-comments"></i><a href="#">120 Comments</a>                                 
+                                 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 
                 <div class="row">
                     <div class="col-md-9 mt25">
