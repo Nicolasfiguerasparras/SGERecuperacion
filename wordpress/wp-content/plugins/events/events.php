@@ -112,17 +112,10 @@
 
             // Dibujar los campos de la metabox con etiquetas HTML
             echo "
-                <div class='generic'>
-                    <div style='text-align: left;'>
-                        <label for='campo1'>Campo 1:</label>
-                        <input type='text' id='campo1' name='campo1' value='".$campo1."'>
-                    </div>
-                    <div style='text-align: right;'>
-                        <label for='campo1'>Campo 1:</label>
-                        <input type='text' id='campo1' name='campo1' value='".$campo1."'>
-                    </div>
-                    
-                </div>
+                <label for='campo1'>Campo 1:</label>
+                <input type='text' id='campo1' name='campo1' value='".$campo1."'>
+                <label for='campo1'>Campo 1:</label>
+                <input type='text' id='campo1' name='campo1' value='".$campo1."'>
             ";
             
         }

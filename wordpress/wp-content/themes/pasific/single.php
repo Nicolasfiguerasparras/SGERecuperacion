@@ -2,6 +2,7 @@
     get_header();
     the_post(); // Con esto accedemos a todas las funciones del post
     add_num_visits($post->ID); // Añadimos una visita al post que estamos visitando
+
     $comments_number = get_comments_number($post->ID);
     if($comments_number == 0){
         $comments_number = "No comments";
@@ -11,18 +12,6 @@
         $comments_number.= " Comments";
     }
 ?>
-
-        <!-- Page Loader
-        ===================================== -->
-		<div id="pageloader" class="bg-grad-animation-1">
-			<div class="loader-item">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/oval.svg" alt="page loader">
-            </div>
-		</div>
-        
-        <a href="#page-top" class="go-to-top">
-            <i class="fa fa-long-arrow-up"></i>
-        </a>
         
         
         <!-- Navigation Area
@@ -130,23 +119,7 @@
                                 <div class="blog-post-leave-comment">
                                     <h5><i class="fa fa-comments-o mb25"></i> <?php echo $comments_number; ?></h5>
                                     <?php 
-                                        $args = array(
-                                            'walker'            => null,
-                                            'max_depth'         => '',
-                                            'style'             => 'ul',
-                                            'callback'          => null,
-                                            'end-callback'      => null,
-                                            'type'              => 'all',
-                                            'page'              => '',
-                                            'per_page'          => '',
-                                            'avatar_size'       => 32,
-                                            'reverse_top_level' => null,
-                                            'reverse_children'  => '',
-                                            'format'            => 'html5', // or 'xhtml' if no 'HTML5' theme support
-                                            'short_ping'        => false,   // @since 3.6
-                                            'echo'              => false     // boolean, default is true
-                                        );
-                                        $comments = wp_list_comments($args);
+                                        
                                     ?>
                                     <h5><i class="fa fa-comment mt25 mb25"></i> Leave Comment</h5>
                                     

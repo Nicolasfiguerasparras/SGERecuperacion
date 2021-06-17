@@ -128,8 +128,7 @@
                 $s = substr($phrase, $number, 1);
                 $serial .= $s;
             }
-          return $serial; 
-
+            return $serial;
         }
 
     }

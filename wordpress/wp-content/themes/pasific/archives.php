@@ -13,18 +13,6 @@
 
 ?>
 
-        <!-- Page Loader
-        ===================================== -->
-		<div id="pageloader" class="bg-grad-animation-1">
-			<div class="loader-item">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/oval.svg" alt="page loader">
-            </div>
-		</div>
-        
-        <a href="#page-top" class="go-to-top">
-            <i class="fa fa-long-arrow-up"></i>
-        </a>
-
         <!-- Navigation Area
         ===================================== -->
         <?php get_template_part('nav'); ?>

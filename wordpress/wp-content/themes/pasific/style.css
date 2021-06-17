@@ -13,3 +13,7 @@
 .archiveBox>h3{
     margin-top: -5px;
 }
+
+#pageloader > div{
+    background-image: none !important;
+}

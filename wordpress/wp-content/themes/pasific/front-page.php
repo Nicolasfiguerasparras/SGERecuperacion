@@ -2,18 +2,6 @@
             get_header();
         ?>
         
-        <!-- Page Loader
-        ===================================== -->
-		<div id="pageloader" class="bg-grad-animation-1">
-			<div class="loader-item">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/other/oval.svg" alt="page loader">
-            </div>
-		</div>
-        
-        <a href="#page-top" class="go-to-top">
-            <i class="fa fa-long-arrow-up"></i>
-        </a>
-        
         <!-- Intro Area
         ===================================== -->
         <header class="intro pt75 pb100 parallax-window" data-parallax="scroll" data-speed="0.5" data-position="top right" data-image-src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Audio%2C_Beats_for_Love_2019_01.jpg">
