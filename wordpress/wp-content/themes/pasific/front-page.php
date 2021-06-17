@@ -63,9 +63,12 @@
 
 
                     <?php
+                        $paged = get_query_var('paged') > 1 ? get_query_var('paged') : 1;
                         // Sacar los últimos 3 posts publicados --- APRENDER DE MEMORIA
                         $args = array(
-                            'post_per_page' => 3,
+                            'post_type' => 'post',
+                            'posts_per_page' => 3,
+                            'paged' => $paged
                         );
 
                         $query = new WP_Query($args);
@@ -109,6 +112,26 @@
                         wp_reset_query();
 
                     ?>
+
+                </div>
+
+                <div class="row">
+
+                    <!-- Paginación -->
+                    <div class="row mt25 animated" data-animation="fadeInUp" data-animation-delay="100">
+                        <div class="col-md-12">
+                            <?php
+                                the_posts_pagination(
+                                    array(
+                                        'mid_size' => 2,
+                                        'prev_text' => 'Previous Page',
+                                        'next_text' => 'Next Page',
+                                        'screen_reader_text' => 'Pages:'
+                                    )
+                                );
+                            ?>
+                        </div>
+                    </div>
                     
                 </div>
                 

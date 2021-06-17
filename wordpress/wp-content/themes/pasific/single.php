@@ -1,9 +1,10 @@
-<?php 
+<?php
     get_header();
     the_post(); // Con esto accedemos a todas las funciones del post
     add_num_visits($post->ID); // Añadimos una visita al post que estamos visitando
+
 ?>
-        
+
         <!-- Page Loader
         ===================================== -->
 		<div id="pageloader" class="bg-grad-animation-1">
@@ -20,31 +21,6 @@
         <!-- Navigation Area
         ===================================== -->
         <?php get_template_part('nav'); ?>
-        
-        
-        <!-- Search Modal Dialog Box
-        ===================================== -->
-        <div id="searchModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header bg-gray">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h5 class="modal-title text-center"><i class="fa fa-search fa-fw"></i> Search here</h5>
-                    </div>
-                    <div class="modal-body">                        
-                        <form action="#" class="inline-form">
-                            <input type="text" class="modal-search-input" autofocus>
-                        </form>
-                    </div>
-                    <div class="modal-footer bg-gray">
-                        <span class="text-center"><a href="#" class="color-dark">Advanced Search</a></span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
         
         
         <!-- Subheader Area
@@ -67,8 +43,7 @@
             </div>
 
         </header>
-        
-        
+
         <!-- Blog Area
         ===================================== -->
         <div id="blog" class="pt20 pb50">
@@ -76,8 +51,8 @@
                 
                 <div class="row">
                     <div class="col-md-9 mt25">
-                        <div class="col-md-8 col-md-offset-2">
-                        
+                        <div class="row">
+                            
                             <div class="blog-three-mini">
                                 <h2 class="color-dark"><?php the_title(); ?></h2>
                                 <div class="blog-three-attrib">
@@ -135,7 +110,7 @@
                                         <p class="mt25">
                                             <?php the_excerpt(); ?>                          
                                         </p>
-                                        <a href="#" class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
+                                        <a href="<?php echo the_permalink(); ?>" class="button button-gray button-xs">Read More <i class="fa fa-long-arrow-right"></i></a>
                                     </div>
                                 </div>
                                 <?php
@@ -147,28 +122,7 @@
                             
                             
                             <!-- Comments template -->
-                            <div class="blog-post-comment-container" id="comments">
-                                <!-- <h5><i class="fa fa-comments-o mb25"></i> <?php comments_number('No comments', '1 Comment', '% Comments'); ?></h5> -->
-
-                                <?php //comments_template(); ?>
-                                
-                                <button class="button button-default button-sm center-block button-block mt25 mb25">Load More Comments</button>
-                        
-                                
-                            </div>
-                            
-                            <div class="blog-post-leave-comment">
-                                <h5><i class="fa fa-comment mt25 mb25"></i> Leave Comment</h5>
-                                
-                                <form>
-                                    <input type="text" name="name" class="blog-leave-comment-input" placeholder="name" required>
-                                    <input type="email" name="name" class="blog-leave-comment-input" placeholder="email"  required>
-                                    <input type="url" name="name" class="blog-leave-comment-input" placeholder="website">
-                                    <textarea name="message" class="blog-leave-comment-textarea"></textarea>
-                                    <button class="button button-pasific button-sm center-block mb25">Leave Comment</button>                            
-                                </form>
-                                
-                            </div>
+                            <?php comments_template(); ?>
                             
                             
                             <!-- Blog Paging
@@ -181,46 +135,21 @@
                                     <a href="#" class="button button-sm button-pasific pull-right hover-skew-forward">New Entries</a>
                                 </div>
                             </div>
-                        </div>
-                        
+                            
+                       
                         
                     </div>
                     
-                    <!-- Sidebar
-                    ================================= -->
-                    <?php
-                        get_sidebar();
-                    ?>
+                    
+                   <?php 
+                        get_sidebar();   
+                    ?>                     
                     
                 </div>                
                 
             </div>
         </div>
-         
-        
-        <!-- Newsletter Area
-        =====================================-->
-        <div id="newsletter" class="bg-dark2 pt50 pb50">
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="col-md-2">
-                        <h4 class="color-light">
-                            Newsletter
-                        </h4>
-                    </div>
-                    
-                    <div class="col-md-10">
-                        <form name="newsletter">
-                            <div class="input-newsletter-container">
-                                <input type="text" name="email" class="input-newsletter" placeholder="enter your email address">
-                            </div>
-                            <a href="#" class="button button-sm button-pasific hover-ripple-out">Subscribe<i class="fa fa-envelope"></i></a>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        
-        <?php get_footer(); ?>
+
+<?php
+    get_footer();
+?>

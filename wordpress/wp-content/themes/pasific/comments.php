@@ -1,8 +1,13 @@
-<div class="blog-post-comment">
-    <img src="assets/img/other/photo-2.jpg" class="img-circle" alt="image">
-    <span class="blog-post-comment-name">John Boo</span> Jan. 20 2016, 10:00 PM
-    <a href="#" class="pull-right text-gray"><i class="fa fa-comment"></i> Reply</a>
-    <p>
-        Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur.
-    </p>
+<div class="blog-post-leave-comment">
+    <h5><i class="fa fa-comments-o mb25"></i> <?php comments_number('No comments', '1 Comment', '% Comments'); ?></h5>
+    <h5><i class="fa fa-comment mt25 mb25"></i> Leave Comment</h5>
+    
+    <form>
+        <input type="text" name="name" class="blog-leave-comment-input" placeholder="name" required>
+        <input type="email" name="name" class="blog-leave-comment-input" placeholder="email"  required>
+        <input type="url" name="name" class="blog-leave-comment-input" placeholder="website">
+        <textarea name="message" class="blog-leave-comment-textarea"></textarea>
+        <button class="button button-pasific button-sm center-block mb25">Leave Comment</button>                            
+    </form>
+    
 </div>

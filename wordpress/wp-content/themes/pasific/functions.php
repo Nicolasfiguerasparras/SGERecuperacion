@@ -400,3 +400,36 @@
 
         return $numvisits;
     }
+
+    /**
+     * Imagenes responsivas
+     */
+    function add_responsive_class($content){
+        if ($content=='') return;
+        $post_format = get_post_format();  
+        switch ($post_format){
+            case 'quote': 
+                $newcontent = preg_replace('/<p([^>]+)?>/', '<p$1 class="my_quote">', $content, 1);
+                return preg_replace('/<p([^>]+)?>/', '<p$1 class="my_quote_author">', $newcontent, 2);
+
+            break;
+
+            default:   
+
+                $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+                $document = new DOMDocument();
+                libxml_use_internal_errors(true);
+                $document->loadHTML(utf8_decode($content)); 
+                $imgs = $document->getElementsByTagName('img');
+                if (get_post_type() != 'my_app'){
+                    foreach ($imgs as $img) {      
+                        $img->setAttribute('class','img-responsive');
+                        $img->setAttribute('width', '100%');
+                        $img->setAttribute('height', '100%');
+                    }
+                }
+        }
+        $html = $document->saveHTML();
+        return $html; 
+    }
+    add_filter ('the_content', 'add_responsive_class');
