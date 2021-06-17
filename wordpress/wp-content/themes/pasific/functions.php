@@ -110,326 +110,406 @@
 
     add_action('wp_enqueue_scripts', 'my_theme_scripts');
 
-    /*
-     *
-     * Obterner un listado con los tags del autor
-     */
 
-    function list_tags($limit) {
-        $args = array(
-            'orderby' => 'count',
-            'order' => 'DESC',
-            'number' => $limit,
-        );
 
-        $tags = get_tags($args);
 
-        foreach($tags as $tag) {
-            echo "<a href='".get_tag_link($tag->term_id)."' rel='tag'>".$tag->name."<span>[". $tag->count ."]</span>";
-        }
-    }
+    // ********** FUNCIONES DE ARCHIVES ********** //
 
-    function post_categories($post_id) {
-        $cats = get_the_category($post_id);
-        $string = '';
-        foreach($cats as $cat) {
-            $string .= "<a href='".get_category_link($cat->term_id)."'>".$cat->name."</a>";
+        /**
+         * Obterner un listado con los tags del autor
+         */
+        function list_tags($limit) {
+            $args = array(
+                'orderby' => 'count',
+                'order' => 'DESC',
+                'number' => $limit,
+            );
+
+            $tags = get_tags($args);
+
+            foreach($tags as $tag) {
+                echo "<a href='".get_tag_link($tag->term_id)."' rel='tag'>".$tag->name."<span>[". $tag->count ."]</span>";
+            }
         }
 
-        return substr($string, 0, -2);
-    }
-
-    /*
-     * Registrar widgets
-     * 
-     */
-    function my_sidebar_widget() {
-        register_sidebar(array(
-            'name' => 'Sidebar Tag Cloud',
-            'id' => 'sidebar_tg',
-            'description' => 'Sidebar Tag Cloud Widget',
-            'before_widget' => '<div>',
-            'after_widget' => '</div>',
-        ));
-    }
-    add_action('widgets_init', 'my_sidebar_widget');
-
-    
-    /**
-     * Add social media & image fields to user profile
-     */
-    function add_social_media($user_methods) {
-        // Añadir los campos de texto como queramos
-        $user_methods['facebook'] = 'Facebook account:'; // Array[nombre del campo] = Descripción del campo
-        $user_methods['instagram'] = 'Instagram account:';
-        $user_methods['twitter'] = 'Twitter account:';
-        $user_methods['picture'] = 'Profile personal picture:';
-        
-        return $user_methods;
-    }
-    add_action ('user_contactmethods', 'add_social_media');
-
-
-    /**
-     * Get the author role of an auhor's ID
-     */
-    function get_author_role($author_id) {
-        $user_info = get_userdata($author_id); // Devuelve un array de elementos
-        return implode(', ', $user_info->roles); // Con implode, convertimos el array en una cadena con los elementos separados con comas
-    }
-
-
-    /**
-     * 
-     * Add skills fields to user profile
-     */
-    function add_skills_fields($user) {
-        echo "
-            <h3>User skills</h3>
-            <label for='skill1'>Skill 1</label>
-            <input type='text' name='skill1' id='skill1' value='".esc_attr(get_the_author_meta('skill1', $user->ID))."'></input>
-
-            <label for='skill2'>Skill 2</label>
-            <input type='text' name='skill2' id='skill2' value='".esc_attr(get_the_author_meta('skill2', $user->ID))."'></input>
-
-            <label for='skill3'>Skill 3</label>
-            <input type='text' name='skill3' id='skill3' value='".esc_attr(get_the_author_meta('skill3', $user->ID))."'></input>
-
-            <label for='skill4'>Skill 4</label>
-            <input type='text' name='skill4' id='skill4' value='".esc_attr(get_the_author_meta('skill4', $user->ID))."'></input>
-
-            <br>
-            
-            <label for='skill1V'>Skill 1 Value</label>
-            <input type='text' name='skill1V' id='skill1V' value='".esc_attr(get_the_author_meta('skill1V', $user->ID))."'></input>
-
-            <label for='skill2V'>Skill 2 Value</label>
-            <input type='text' name='skill2V' id='skill2V' value='".esc_attr(get_the_author_meta('skill2V', $user->ID))."'></input>
-
-            <label for='skill3V'>Skill 3 Value</label>
-            <input type='text' name='skill3V' id='skill3V' value='".esc_attr(get_the_author_meta('skill3V', $user->ID))."'></input>
-
-            <label for='skill4V'>Skill 4 Value</label>
-            <input type='text' name='skill4V' id='skill4V' value='".esc_attr(get_the_author_meta('skill4V', $user->ID))."'></input>
-            
-        ";
-    }
-    add_action('show_user_profile', 'add_skills_fields');
-    add_action('edit_user_profile', 'add_skills_fields');
-
-    
-    /**
-     * Save user skills values into database
-     */
-    function save_skills_fields($user_id) {
-        update_user_meta($user_id, 'skill1', $_POST['skill1']);
-        update_user_meta($user_id, 'skill1V', $_POST['skill1V']);
-        update_user_meta($user_id, 'skill2', $_POST['skill2']);
-        update_user_meta($user_id, 'skill2V', $_POST['skill2V']);
-        update_user_meta($user_id, 'skill3', $_POST['skill3']);
-        update_user_meta($user_id, 'skill3V', $_POST['skill3V']);
-        update_user_meta($user_id, 'skill4', $_POST['skill4']);
-        update_user_meta($user_id, 'skill4V', $_POST['skill4V']);
-    }
-    add_action('personal_options_update' ,'save_skills_fields');
-    add_action('edit_user_profile_update', 'save_skills_fields');
-
-    /**
-     * Check if a url returns a 200 code
-     */
-    function does_url_exists($url) {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_NOBODY, true);
-        curl_exec($ch);
-        $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-   
-        if ($code == 200) {
-            $status = true;
-        } else {
-            $status = false;
-        }
-        curl_close($ch);
-        return $status;
-    }
-
-    /**
-     * Customizar la plantilla de comentarios
-     */
-    function customize_comments_template($fields) {
-        $aux = array(); // Creamos un array auxiliar para ir añadiendole los campos que queramos
-
-        // Vamos añadiendo los campos de $field que queramos a nuestro array auxiliar
-        array_push($aux, $fields['author']);
-        array_push($aux, $fields['email']);
-        array_push($aux, $fields['comment']);
-        array_push($aux, $fields['cookies']);
-
-        $aux['consent'] = 'aqui va el html del checkbox del consentimiento de datos';
-
-        return $aux;
-    }
-    add_action('comment_form_fields', 'customize_comments_template');
-
-    /**
-     * Customizar el login de WP
-     */
-    function customize_login() {
-        ?>
-            <style>
-                /* Cambiamos el logo del login form */
-                #login h1 a, .login h1 a {
-                    width: 50%;
-                    height: 160px;
-                    
-                    background-image: url("<?php echo get_template_directory_uri().'/img/logo.png' ?>");
-                    background-size: cover;
-                    background-position: cente center;
-                    backgorund-repeat: no-repeat;
-                }
-
-                .login {
-                    background-color: yellow;
-                }
-            </style>
-        <?php
-    }
-    add_action('login_enqueue_scripts', 'customize_login');
-
-    /**
-     * Customizar la url a la que dirige el logo del login
-     */
-    function customize_logo_url() {
-        return home_url();
-    }
-    add_filter('login_headerurl', 'customize_logo_url');
-
-    /**
-     * Crear una nueva columna en el area de comentarios en el back-end 
-     */
-    function add_column_consent($columns) {
-        // TODO
-        $columns = array(
-            'ob' => '<input type="checkbox">',
-            'author' => 'Author',
-            'comment' => 'Comment',
-            'consent' => 'Consent',
-            'response' => 'In Response',
-            'date' => 'Submitted on',
-        );
-
-        return $columns;
-    }
-    add_action('manage_edit-comment_columns', 'add_column_consent');
-
-    /**
-     * Guardar el campo politica de privacidad en la BBDD
-     */
-    function save_consent($comment_id){
-        $consent_v = $_POST['consent'];
-
-        if($consent_v == true){
-            $consent = "He aceptado la política de privacidad y consiento la publicación del comentario";
-        }else{
-            $consent = "No he aceptado la política de privacidad";
-        }
-
-        add_comment_meta($comment_id, 'consent', $consent, true);
-    }
-    add_action('comment_post', 'save_consent');
-
-    /**
-     * Mostrar la columna de consentimiento
-     */
-    function display_consent($column, $comment_id) {
-        if($column == 'consent') {
-            echo get_comment_meta($comment_id, 'consent', true);
-        }
-    }
-    add_action('manage_comments_custom_column', 'display_consent', 1, 2);
-
-    /**
-     * Mostrar el número de comentarios
-     */
-    function get_comment_number($post_id) {
-        $numcomments = get_post_meta($post_id, 'comment_number', true);
-
-        if($numcomments == 1){
-            $sufix = " Comment";
-        }else{
-            $sufix = " Comments";
-        }
-
-        return $numcomments.$sufix;
-    }
-
-    /**
-     * Contador de visitas
-     */
-    function get_num_visits($post_id) {
-        $numvisits = get_post_meta($post_id, 'numvisits', true);
-
-        if($numvisits == 1){
-            $sufix = " Visit";
-        }else{
-            $sufix = " Visits";
-        }
-
-        return $numvisits.$sufix;
-    }
-
-    /**
-     * Añadir visita a post
-     */
-    function add_num_visits($post_id) {
-        $numvisits = 1;
-
-        // Chequear si existe ya el contador de visitas, en caso de que no, lo creamos
-        if(!add_post_meta($post_id, 'numvisits', $numvisits, true)){
-            
-            // Solo si estamos en la plantilla single
-            if(is_single()){
-                // El contador ya existe, le tenemos que añadir 1
-                $numvisits = get_post_meta($post_id, 'numvisits', true) + 1;
-
-                // Actualizamos el nuevo valor del contador de visitas
-                update_post_meta($post_id, 'numvisits', $numvisits);
+        /**
+         * Obtener un listado con las categorías de los posts
+         */
+        function post_categories($post_id) {
+            $cats = get_the_category($post_id);
+            $string = '';
+            foreach($cats as $cat) {
+                $string .= "<a href='".get_category_link($cat->term_id)."'>".$cat->name."</a>";
             }
 
+            return substr($string, 0, -2);
+        }
+
+    // ********** /funciones de archives ********** //
+
+
+
+
+    // ********** PARAMETROS DE USUARIO ********** //
+    
+        /**
+         * Añadir campos a los metadatos del usuario
+         */
+        function add_social_media($user_methods) {
+            // Añadir los campos de texto como queramos
+            $user_methods['facebook'] = 'Facebook account:'; // Array[nombre del campo] = Descripción del campo
+            $user_methods['instagram'] = 'Instagram account:';
+            $user_methods['twitter'] = 'Twitter account:';
+            $user_methods['picture'] = 'Profile personal picture:';
             
+            return $user_methods;
+        }
+        add_action ('user_contactmethods', 'add_social_media');
+
+
+        /**
+         * Obtener el Rol de un usuario mediante su ID
+         */
+        function get_author_role($author_id) {
+            $user_info = get_userdata($author_id); // Devuelve un array de elementos
+            return implode(', ', $user_info->roles); // Con implode, convertimos el array en una cadena con los elementos separados con comas
         }
 
-        return $numvisits;
-    }
 
-    /**
-     * Imagenes responsivas
-     */
-    function add_responsive_class($content){
-        if ($content=='') return;
-        $post_format = get_post_format();  
-        switch ($post_format){
-            case 'quote': 
-                $newcontent = preg_replace('/<p([^>]+)?>/', '<p$1 class="my_quote">', $content, 1);
-                return preg_replace('/<p([^>]+)?>/', '<p$1 class="my_quote_author">', $newcontent, 2);
+        /**
+         * Añadir campos Skills al backend del usuario
+         */
+        function add_skills_fields($user) {
+            echo "
+                <h3>User skills</h3>
+                <label for='skill1'>Skill 1</label>
+                <input type='text' name='skill1' id='skill1' value='".esc_attr(get_the_author_meta('skill1', $user->ID))."'></input>
 
-            break;
+                <label for='skill2'>Skill 2</label>
+                <input type='text' name='skill2' id='skill2' value='".esc_attr(get_the_author_meta('skill2', $user->ID))."'></input>
 
-            default:   
+                <label for='skill3'>Skill 3</label>
+                <input type='text' name='skill3' id='skill3' value='".esc_attr(get_the_author_meta('skill3', $user->ID))."'></input>
 
-                $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
-                $document = new DOMDocument();
-                libxml_use_internal_errors(true);
-                $document->loadHTML(utf8_decode($content)); 
-                $imgs = $document->getElementsByTagName('img');
-                if (get_post_type() != 'my_app'){
-                    foreach ($imgs as $img) {      
-                        $img->setAttribute('class','img-responsive');
-                        $img->setAttribute('width', '100%');
-                        $img->setAttribute('height', '100%');
+                <label for='skill4'>Skill 4</label>
+                <input type='text' name='skill4' id='skill4' value='".esc_attr(get_the_author_meta('skill4', $user->ID))."'></input>
+
+                <br>
+                
+                <label for='skill1V'>Skill 1 Value</label>
+                <input type='text' name='skill1V' id='skill1V' value='".esc_attr(get_the_author_meta('skill1V', $user->ID))."'></input>
+
+                <label for='skill2V'>Skill 2 Value</label>
+                <input type='text' name='skill2V' id='skill2V' value='".esc_attr(get_the_author_meta('skill2V', $user->ID))."'></input>
+
+                <label for='skill3V'>Skill 3 Value</label>
+                <input type='text' name='skill3V' id='skill3V' value='".esc_attr(get_the_author_meta('skill3V', $user->ID))."'></input>
+
+                <label for='skill4V'>Skill 4 Value</label>
+                <input type='text' name='skill4V' id='skill4V' value='".esc_attr(get_the_author_meta('skill4V', $user->ID))."'></input>
+                
+            ";
+        }
+        add_action('show_user_profile', 'add_skills_fields');
+        add_action('edit_user_profile', 'add_skills_fields');
+
+    
+        /**
+         * Guardar los valores de los campos Skills del backend del usuario
+         */
+        function save_skills_fields($user_id) {
+            update_user_meta($user_id, 'skill1', $_POST['skill1']);
+            update_user_meta($user_id, 'skill1V', $_POST['skill1V']);
+            update_user_meta($user_id, 'skill2', $_POST['skill2']);
+            update_user_meta($user_id, 'skill2V', $_POST['skill2V']);
+            update_user_meta($user_id, 'skill3', $_POST['skill3']);
+            update_user_meta($user_id, 'skill3V', $_POST['skill3V']);
+            update_user_meta($user_id, 'skill4', $_POST['skill4']);
+            update_user_meta($user_id, 'skill4V', $_POST['skill4V']);
+        }
+        add_action('personal_options_update' ,'save_skills_fields');
+        add_action('edit_user_profile_update', 'save_skills_fields');
+
+    // ********** /parametros de usuario ********** //
+
+
+
+
+    // ********** UTILIDADES ********** //
+        
+        /**
+         * Comprobar si una URL nos devuelve un codigo 200
+         */
+        function does_url_exists($url) {
+            $ch = curl_init($url);
+            curl_setopt($ch, CURLOPT_NOBODY, true);
+            curl_exec($ch);
+            $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+            if ($code == 200) {
+                $status = true;
+            } else {
+                $status = false;
+            }
+            curl_close($ch);
+            return $status;
+        }
+
+        /**
+         * Imagenes responsivas
+         */
+        function add_responsive_class($content){
+            if ($content=='') return;
+            $post_format = get_post_format();  
+            switch ($post_format){
+                case 'quote': 
+                    $newcontent = preg_replace('/<p([^>]+)?>/', '<p$1 class="my_quote">', $content, 1);
+                    return preg_replace('/<p([^>]+)?>/', '<p$1 class="my_quote_author">', $newcontent, 2);
+
+                break;
+
+                default:   
+
+                    $content = mb_convert_encoding($content, 'HTML-ENTITIES', "UTF-8");
+                    $document = new DOMDocument();
+                    libxml_use_internal_errors(true);
+                    $document->loadHTML(utf8_decode($content)); 
+                    $imgs = $document->getElementsByTagName('img');
+                    if (get_post_type() != 'my_app'){
+                        foreach ($imgs as $img) {      
+                            $img->setAttribute('class','img-responsive');
+                            $img->setAttribute('width', '100%');
+                            $img->setAttribute('height', '100%');
+                        }
                     }
-                }
+            }
+            $html = $document->saveHTML();
+            return $html; 
         }
-        $html = $document->saveHTML();
-        return $html; 
-    }
-    add_filter ('the_content', 'add_responsive_class');
+        add_filter ('the_content', 'add_responsive_class');
+
+        /**
+         * Registrar widgets
+         */
+        function my_sidebar_widget() {
+            register_sidebar(array(
+                'name' => 'Sidebar Tag Cloud',
+                'id' => 'sidebar_tg',
+                'description' => 'Sidebar Tag Cloud Widget',
+                'before_widget' => '<div>',
+                'after_widget' => '</div>',
+            ));
+        }
+        add_action('widgets_init', 'my_sidebar_widget');
+
+    // ********** /utilidades ********** //
+
+
+
+
+    // ********** FUNCIONES PARA LOS POSTS ********** //
+
+        /**
+         * Mostrar el número de comentarios
+         */
+        function get_comment_number($post_id) {
+            $numcomments = get_post_meta($post_id, 'comment_number', true);
+
+            if($numcomments == 1){
+                $sufix = " Comment";
+            }else{
+                $sufix = " Comments";
+            }
+
+            return $numcomments.$sufix;
+        }
+
+        /**
+         * Contador de visitas
+         */
+        function get_num_visits($post_id) {
+            $numvisits = get_post_meta($post_id, 'numvisits', true);
+
+            if($numvisits == 1){
+                $sufix = " Visit";
+            }else{
+                $sufix = " Visits";
+            }
+
+            return $numvisits.$sufix;
+        }
+
+        /**
+         * Añadir visita a post
+         */
+        function add_num_visits($post_id) {
+            $numvisits = 1;
+
+            // Chequear si existe ya el contador de visitas, en caso de que no, lo creamos
+            if(!add_post_meta($post_id, 'numvisits', $numvisits, true)){
+                
+                // Solo si estamos en la plantilla single
+                if(is_single()){
+                    // El contador ya existe, le tenemos que añadir 1
+                    $numvisits = get_post_meta($post_id, 'numvisits', true) + 1;
+
+                    // Actualizamos el nuevo valor del contador de visitas
+                    update_post_meta($post_id, 'numvisits', $numvisits);
+                }
+
+                
+            }
+
+            return $numvisits;
+        }
+
+    // ********** /funciones para los posts ********** //
+    
+      
+    
+    
+    // ********** CUSTOMIZAR EL LOGIN ********** //
+
+        /**
+         * Customizar el login de WP
+         */
+        function customize_login() {
+            ?>
+                <style>
+                    /* Cambiamos el logo del login form */
+                    #login h1 a, .login h1 a {
+                        width: 50%;
+                        height: 160px;
+                        
+                        background-image: url("<?php echo get_template_directory_uri().'/img/logo.png' ?>");
+                        background-size: cover;
+                        background-position: cente center;
+                        backgorund-repeat: no-repeat;
+                    }
+
+                    .login {
+                        background-color: yellow;
+                    }
+                </style>
+            <?php
+        }
+        add_action('login_enqueue_scripts', 'customize_login');
+
+        /**
+         * Customizar la url a la que dirige el logo del login
+         */
+        function customize_logo_url() {
+            return home_url();
+        }
+        add_filter('login_headerurl', 'customize_logo_url');
+    
+    // ********** CUSTOMIZAR EL LOGIN ********** //
+    
+
+    
+
+    // ********** COMENTARIOS ********** //
+    
+        /**
+         * Mostrar la columna de consentimiento
+         */
+        function display_consent($column, $comment_id) {
+            if($column == 'consent') {
+                echo get_comment_meta($comment_id, 'consent', true);
+            }
+        }
+        add_action('manage_comments_custom_column', 'display_consent', 1, 2);
+
+        /**
+         * Eliminar campos del formulario de contacto
+         */
+        function remove_comment_fields($fields) {
+            unset($fields['url']);
+            unset($fields['cookies']);
+            return $fields;
+        }
+        add_filter('comment_form_default_fields','remove_comment_fields');
+
+        /**
+         * Añadir nuevos campos para el consentimiento de la política de privacidad
+         */
+        function imagos_add_comment_fields( $fields ) {
+            $fields['consent'] = '
+            <p class="comment-form-public">
+                <input id="consent" name="consent" type="checkbox" />
+                <label for="consent">
+                    Check this box to give us permission to publicly post your Review. (Accept our <a href="#">privacy policy</a>)
+                </label>
+            </p>';
+            return $fields;
+        }
+        add_filter('comment_form_default_fields', 'imagos_add_comment_fields');
+
+        /**
+         * Guardar el valor de la casilla en la BBDD
+         */
+        function save_comment_meta_checkbox( $comment_id ) {
+            // save_comment_meta_checkbox forbidden name for this function
+            $checkbox = $_POST['consent'];
+            if ( $checkbox == 'on' ) {
+                $value = 'Checkbox is checked: I accept the privacy policy';
+            } else {
+                $value = 'Checkbox is NOT checked: I do not accept';
+            }
+            // last argument means the field name is unique in the database table (only creates one register per comment)
+            add_comment_meta( $comment_id , 'consent', $value, true );
+        }
+        add_action( 'comment_post', 'save_comment_meta_checkbox');
+
+        /**
+         * 
+         */
+        function imagos_editcomments_add_columns( $columns ) {
+            $columns = array(
+            'cb' => '<input type="checkbox" />',
+            'author' => 'Author',
+            'comment' => 'Comment',
+            'consent_column' => 'Public',// Name of the new column in back-end comments area
+            'response' => 'In Response To'
+            );
+            return $columns;
+        }
+        add_filter('manage_edit-comments_columns', 'imagos_editcomments_add_columns');
+
+        /**
+         * 
+         */
+        function imagos_consent_column($col, $comment_id){
+            // you could expand the switch to take care of other custom columns
+            switch($col) {
+                case 'consent_column':
+                    if($t = get_comment_meta($comment_id, 'consent', true)){
+                        echo esc_html($t);
+                    } else {
+                        echo esc_html('');
+                    }
+                    break;
+            }
+        }
+        add_action('manage_comments_custom_column', 'imagos_consent_column', 10, 2);
+
+        /**
+         * Customizar la plantilla de comentarios
+         */
+        function imagos_modify_fields_form( $args ){
+            $commenter = wp_get_current_commenter();
+            $req = get_option( 'require_name_email' );
+
+            $aria_req = ( $req ? " aria-required='true'" : '' );
+            $author = '<input placeholder="'.__( 'Name' ) . ( $req ? ' *' : '' ).'" id="author" name="author" type="text" value="' . esc_attr( $commenter['comment_author'] ) .'" class="blog-leave-comment-input" ' . $aria_req . ' />';
+            $email = '<input placeholder="'.__( 'Email' ) . ( $req ? ' *' : '' ).'" id="email" name="email" type="email" value="' . esc_attr( $commenter['comment_author_email'] ) .'" class="blog-leave-comment-input" ' . $aria_req . '/>';
+            $comment = '<textarea placeholder="'. _x( 'Comment', 'noun' ).'" id="comment" name="comment" class="blog-leave-comment-textarea" aria-required="true"></textarea>';
+            $args['fields']['author'] = $author;
+            $args['fields']['email'] = $email;
+            $args['comment_field'] = $comment;
+            return $args;
+        }
+        add_filter( 'comment_form_defaults', 'imagos_modify_fields_form' );
+            
+    
+    // ********** /comentarios ********** //

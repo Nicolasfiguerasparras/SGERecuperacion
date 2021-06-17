@@ -65,7 +65,7 @@
                     'limit'=> 10, 
                     'type'=> 'postbypost',
                     'format' => 'custom',
-                    'before' => '<div class="blog-sidebar-popular-post-container"><h6>',
+                    'before' => '<div class="blog-sidebar-popular-post-container" style="border-bottom: 1px dotted #ccc; height: auto !important;"><h6>',
                     'after' => '</h6></div>',  
                 )
             );

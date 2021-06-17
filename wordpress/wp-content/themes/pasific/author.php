@@ -62,7 +62,6 @@
                         </h3>
                         <p>
                             <?php echo get_user_meta($curauth->ID, 'description', true); ?> <br>
-                            <a class="button button-sm button-pasific mt20 hover-ripple-out animated" data-animation="slideInRight" data-animation-delay="100">See posts</a>
                         </p>
                     </div>
                 </div>
@@ -127,6 +126,15 @@
                         if($query->have_posts()):
                             while($query->have_posts()):
                                 $query->the_post(); // A partir de aquí ya tenemos acceso al post y a sus propiedades.
+
+                                $comments_number = get_comments_number($post->ID);
+                                if($comments_number == 0){
+                                    $comments_number = "No comments";
+                                }elseif($comments_number == 1){
+                                    $comments_number.= " Comment";
+                                }else{
+                                    $comments_number.= " Comments";
+                                }
                     ?>
 
                     <!-- Blog Item -->
@@ -148,13 +156,13 @@
                             </div>
                             <div class="blog-one-footer">
                                 <a href="<?php the_permalink(); ?>">Read More</a>
-                                <!-- <i class="fa fa-heart"></i>59 Likes -->
-                                <!-- <i class="fa fa-comments"></i><a href="#">120 Comments</a> -->
+                                <i class="fa fa-eye"></i><?php echo get_num_visits($post->ID); ?>
+                                <i class="fa fa-comments"></i><?php echo $comments_number ?>
                                 <i class="fa fa-tags"></i>
                                 <?php
                                     $tags = get_the_tags(get_the_ID());
                                     foreach($tags as $tag) {
-                                        echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> '; // Meter en una variable get_the_tags
+                                        echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> ';
                                     }
                                 ?>
                             </div>

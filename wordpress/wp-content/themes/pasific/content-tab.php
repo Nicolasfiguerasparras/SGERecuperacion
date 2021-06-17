@@ -11,7 +11,7 @@
         <?php the_time('j M Y'); ?>
     </td>
     <td>
-        <a href="'<?php the_permalink(); ?>"><?php the_title(); ?></a>
+        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
     </td>
     <td>
         <?php the_author(); ?>

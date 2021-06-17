@@ -87,16 +87,26 @@
                                                     $postImage = get_template_directory_uri()."/img/blog/blog_default.png";
                                                 endif;
 
+                                                // Sacar el número de comentarios
+                                                $comments_number = get_comments_number($post->ID);
+                                                if($comments_number == 0){
+                                                    $comments_number = "No comments";
+                                                }elseif($comments_number == 1){
+                                                    $comments_number.= " Comment";
+                                                }else{
+                                                    $comments_number.= " Comments";
+                                                }
+
                                     ?>
                                     
                                     
 
                                     <h2><a href="#"><?php the_title(); ?></a></h2>
                                     <div class="blog-three-attrib">
-                                        <div><i class="fa fa-calendar"></i><?php the_date(); ?></div> | 
+                                        <div><i class="fa fa-calendar"></i><?php the_date('d-m-Y'); ?></div> | 
                                         <div><i class="fa fa-pencil"></i><?php the_author_posts_link(); ?></div> | 
-                                        <div><i class="fa fa-comment-o"></i><a href="#">90 Comments</a></div> | 
-                                        <div><i class="fa fa-eye"></i><?php ?></div> | 
+                                        <div><i class="fa fa-comment-o"></i><?php echo $comments_number; ?></div> | 
+                                        <div><i class="fa fa-eye"></i><?php echo get_num_visits(get_the_ID()); ?></div> | 
                                         
                                     </div>
                                     <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="img-responsive" alt="image blog">
@@ -115,9 +125,9 @@
                             </div>
 
 
-                            </div>
+                        </div>
 
-                            <div class="row blog-masonry-3col">
+                        <div class="row blog-masonry-3col">
 
                             <?php
 
@@ -135,6 +145,21 @@
 
                                         // Sacamos la imagen del autor
                                         $my_path = get_template_directory_uri().get_user_meta(get_the_author_meta( 'ID' ), 'picture', true);
+                                        if(does_url_exists($my_path) > 0){
+                                            $profilepic = $my_path;
+                                        }else{
+                                            $profilepic = get_template_directory_uri().'/img/author-default.jpg';
+                                        }
+
+                                        // Sacar el número de comentarios
+                                        $comments_number = get_comments_number($post->ID);
+                                        if($comments_number == 0){
+                                            $comments_number = "No comments";
+                                        }elseif($comments_number == 1){
+                                            $comments_number.= " Comment";
+                                        }else{
+                                            $comments_number.= " Comments";
+                                        }
                             ?>
 
                             <!-- Blog Item -->
@@ -144,9 +169,9 @@
                                         <img src="<?php echo get_the_post_thumbnail_url(); ?>" class="img-responsive" alt="image blog">
                                     </div>
                                     <div class="blog-one-attrib">                                
-                                        <img src="<?php echo $my_path; ?>" alt="photo blog" class="blog-author-photo">
+                                        <img src="<?php echo $profilepic; ?>" alt="photo blog" class="blog-author-photo">
                                         <span class="blog-author-name"><?php the_author_posts_link(); ?></span>                                                           
-                                        <span class="blog-date"><?php the_date(); ?></span>                                                          
+                                        <span class="blog-date"><?php echo get_the_date('d-m-Y'); // Funciona mejor get_the_date que the_date por algún motivo ?></span>                                                          
                                     </div>
                                     <div class="blog-one-body">
                                         <h4 class="blog-title"><a href="<?php echo the_permalink(); ?>"><?php the_title(); ?></a></h4>
@@ -154,8 +179,8 @@
                                     </div>
                                     <div class="blog-one-footer">
                                         <a href="<?php echo the_permalink(); ?>">Read More</a>
-                                        <i class="fa fa-eye"></i>59 Likes
-                                        <i class="fa fa-comments"></i><a href="#">120 Comments</a>                                 
+                                        <i class="fa fa-eye"></i><?php echo get_num_visits(get_the_ID()); ?>
+                                        <i class="fa fa-comments"></i><?php echo $comments_number; ?>
                                         
                                     </div>
                                 </div>
