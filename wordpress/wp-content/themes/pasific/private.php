@@ -15,7 +15,7 @@
         $args = array(
             'label_username' => 'Username',
             'label_password' => 'Password'
-        )
+        );
         wp_login_form($args);
         wp_register('html para el registro de nuevo usuario');
     }else{

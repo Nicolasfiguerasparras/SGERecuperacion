@@ -17,3 +17,7 @@
 #pageloader > div{
     background-image: none !important;
 }
+
+li{
+    list-style-type: none;
+}

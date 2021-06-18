@@ -65,28 +65,28 @@
 
                     <div class="col-md-3 -col-sm-6 col-xs-12">                  
                         <div class="circle-progress circle-progress-bg-grad-violet center-block" data-value=".<?php echo get_user_meta($curauth->ID, 'skill1V', true); ?>" data-size="150" data-thickness="20">
-                            <span class="circle-progress-value color-light"></span>
+                            <span class="circle-progress-value color-light" style="color:black !important;"></span>
                             <span class="circle-progress-title"><?php echo get_user_meta($curauth->ID, 'skill1', true); ?></span>
                         </div>
                     </div>
 
                     <div class="col-md-3 -col-sm-6 col-xs-12">                  
                         <div class="circle-progress circle-progress-bg-grad-blood-mary center-block" data-value=".<?php echo get_user_meta($curauth->ID, 'skill2V', true); ?>" data-size="150" data-thickness="20">
-                            <span class="circle-progress-value color-light"></span>
+                            <span class="circle-progress-value color-light" style="color:black !important;"></span>
                             <span class="circle-progress-title"><?php echo get_user_meta($curauth->ID, 'skill2', true); ?></span>
                         </div>
                     </div>
 
                     <div class="col-md-3 -col-sm-6 col-xs-12">                  
                         <div class="circle-progress circle-progress-bg-grad-mojito center-block" data-value=".<?php echo get_user_meta($curauth->ID, 'skill3V', true); ?>" data-size="150" data-thickness="20">
-                            <span class="circle-progress-value color-light"></span>
+                            <span class="circle-progress-value color-light" style="color:black !important;"></span>
                             <span class="circle-progress-title"><?php echo get_user_meta($curauth->ID, 'skill3', true); ?></span>
                         </div>
                     </div>
 
                     <div class="col-md-3 -col-sm-6 col-xs-12">                  
                         <div class="circle-progress circle-progress-bg-grad-tripper center-block" data-value=".<?php echo get_user_meta($curauth->ID, 'skill4V', true); ?>" data-size="150" data-thickness="20">
-                            <span class="circle-progress-value color-light"></span>
+                            <span class="circle-progress-value color-light" style="color:black !important;"></span>
                             <span class="circle-progress-title"><?php echo get_user_meta($curauth->ID, 'skill4', true); ?></span>
                         </div>
                     </div>
