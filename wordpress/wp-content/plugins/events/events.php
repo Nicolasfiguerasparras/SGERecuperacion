@@ -108,14 +108,18 @@
             wp_nonce_field(__FILE__, 'events_nonce');
 
             // Data harvesting de los campos
-            $campo1 = get_post_meta($post->ID, 'campo1', true); // Así con todos
+            $date = get_post_meta($post->ID, 'date', true);
+            $place = get_post_meta($post->ID, 'place', true);
+            $hour = get_post_meta($post->ID, 'hour', true);
 
             // Dibujar los campos de la metabox con etiquetas HTML
             echo "
-                <label for='campo1'>Campo 1:</label>
-                <input type='text' id='campo1' name='campo1' value='".$campo1."'>
-                <label for='campo1'>Campo 1:</label>
-                <input type='text' id='campo1' name='campo1' value='".$campo1."'>
+                <label for='date'>Date of venue:</label>
+                <input type='date' id='date' name='date' value='".$date."'>
+                <label for='place'>Place:</label>
+                <input type='text' id='place' name='place' value='".$place."'>
+                <label for='hour'>Start hour:</label>
+                <input type='time' id='hour' name='hour' value='".$hour."'>
             ";
             
         }
@@ -143,11 +147,15 @@
             }
 
             // Sanear el contenido de los campos
-            if(isset($_POST['campo1'])){
-                $campo1 = sanitize_text_field($_POST['campo1']);
+            if(isset($_POST['date']) && isset($_POST['place']) && isset($_POST['hour'])){
+                $date = sanitize_text_field($_POST['date']);
+                $place = sanitize_text_field($_POST['place']);
+                $hour = sanitize_text_field($_POST['hour']);
 
                 // Actualizar el contenido de los campos
-                update_post_meta($post_id, 'campo1', $campo1);
+                update_post_meta($post_id, 'date', $date);
+                update_post_meta($post_id, 'place', $place);
+                update_post_meta($post_id, 'hour', $hour);
             }
         }
 

@@ -16,7 +16,7 @@
             <li><a href="<?php echo get_page_link( get_page_by_title('Blog')->ID ); ?>">Blog</a></li>
             <li><a href="<?php echo get_page_link( get_page_by_title('Archives')->ID ); ?>">Archives</a></li>
             <li><a href="<?php echo get_page_link( get_page_by_title('Events')->ID ); ?>">Events</a></li>
-            <li><a href="<?php echo get_page_link( get_page_by_title('Contact')->ID ); ?>">Contact</a></li>
+            <!-- <li><a href="<?php echo get_page_link( get_page_by_title('Contact')->ID ); ?>">Contact</a></li> -->
         </ul>
     </div>
 </nav>

@@ -121,7 +121,7 @@
 
                                 // Sacar último post
                                 $args = array(
-                                    'post_per_page' => 1,
+                                    'posts_per_page' => 3,
                                     'post__not_in' => array($idDestacado),
                                 );
 

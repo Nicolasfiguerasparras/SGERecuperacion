@@ -93,7 +93,7 @@
                                 while($mostcommented->have_posts()):
                                     $mostcommented->the_post();
                         ?>
-                        <a href='<?php echo get_permalink($post->ID); ?>''><?php echo $post->post_title; ?> (<?php echo get_comment_number($post->ID); ?>)</a><br><br>
+                        <a href='<?php echo get_permalink($post->ID); ?>''><?php echo $post->post_title; ?> (<?php echo get_comments_number($post->ID); ?>)</a><br><br>
 
                         <?php
                                 endwhile;
@@ -205,6 +205,35 @@
                 <?php
                     }
                 ?>
+
+                <!-- Yearly posts -->
+                <div class="col-md-3 col-sm-6 col-xs-12 mb35">
+                    <div class="content-box content-box-o content-box-center">                        
+                        <span class="icon-tag"></span>
+                        <h3>Events</h3>               
+                        <?php
+                            $args = array(
+                                // 'post_per_page' => 2,
+                                // 'post__not_in' => array($post_destacado_id),
+                                'post_type' => array('events'),
+                                // 'paged' => $paged, // Para una plantilla NO estatica, uso paged
+                            );
+
+                            $events = new WP_Query($args);
+                            
+                            if($events->have_posts()):
+                                while($events->have_posts()):
+                                    $events->the_post();
+                        ?>
+                        <a href='<?php echo get_permalink($post->ID); ?>''><?php echo $post->post_title; ?></a><br><br>
+
+                        <?php
+                                endwhile;
+                            endif;
+                            wp_reset_query();
+                        ?>
+                    </div>
+                </div>
                 
             </div>
         </div>

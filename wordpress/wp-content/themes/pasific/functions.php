@@ -388,8 +388,17 @@
                     }
 
                     .login {
-                        background-color: yellow;
+                        background-color: aqua;
                     }
+
+                    #loginform{
+                        background-color: aqua;
+                    }
+
+                    #login > p.message{
+                        background-color: aqua;
+                    }
+
                 </style>
             <?php
         }

@@ -1,5 +1,6 @@
         <?php
             get_header();
+            global $query_front_page;
         ?>
         
         <!-- Intro Area
@@ -59,11 +60,11 @@
                             'paged' => $paged
                         );
 
-                        $query = new WP_Query($args);
+                        $query_front_page = new WP_Query($args);
 
-                        if($query->have_posts()):
-                            while($query->have_posts()):
-                                $query->the_post();
+                        if($query_front_page->have_posts()):
+                            while($query_front_page->have_posts()):
+                                $query_front_page->the_post();
 
                                 // Sacamos la imagen del autor
                                 $my_path = get_template_directory_uri().get_user_meta(get_the_author_meta( 'ID' ), 'picture', true);
@@ -127,15 +128,70 @@
                     <div class="row mt25 animated" data-animation="fadeInUp" data-animation-delay="100">
                         <div class="col-md-12">
                             <?php
-                                the_posts_pagination(
-                                    array(
-                                        'mid_size' => 2,
-                                        'prev_text' => 'Previous Page',
-                                        'next_text' => 'Next Page',
-                                        'screen_reader_text' => 'Pages:'
-                                    )
-                                );
+                                // the_posts_pagination(
+                                //     array(
+                                //         'mid_size' => 2,
+                                //         'prev_text' => 'Previous Page',
+                                //         'next_text' => 'Next Page',
+                                //         'screen_reader_text' => 'Pages:'
+                                //     )
+                                // );
+                                // $big = 999999999;
+                                // echo paginate_links(array(
+                                //     'prev_text' => 'Previous Page',
+                                //     'next_text' => 'Next Page',
+                                //     'base' => str_replace( $big, '%#%', get_pagenum_link( $big ) ),
+                                //     'format' => '?paged=%#%',
+                                //     'current' => max( 1, get_query_var('paged') ),
+                                //     'total' => $query_front_page->max_num_pages,
+                                // ));
+
+                                $big = 999999999;
+                                the_posts_pagination(array(
+                                    'prev_text' => 'Previous Page',
+                                    'next_text' => 'Next Page',
+                                    'screen_reader_text' => 'Pages:',
+                                    'base' => str_replace( $big, '%#%', get_pagenum_link( $big ) ),
+                                    'format' => '?paged=%#%',
+                                    'current' => max( 1, get_query_var('paged') ),
+                                    'total' => $query_front_page->max_num_pages
+                                ));
+
+                                // echo (get_query_var('paged')) ? get_query_var('paged') : 1;
+                                // echo $_REQUEST['pno'];
+                                // print_r($_REQUEST);
+
+                                // print_r($page_links);
+                                // print_r($page_links[1]);
+
+                                // $pages = paginate_links( array(
+                                //     'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                                //     'format' => '?paged=%#%',
+                                //     'current' => max( 1, get_query_var('paged') ),
+                                //     'total' => $query->max_num_pages,
+                                //     'type'  => 'array',
+                                // ) );
+                                // if( is_array( $pages ) ) {
+                                //     $paged = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
+                                //     echo '<div class="col-md-8 col-md-offset-2" style="align-content: center; width:"><ul class="pagination">';
+                                //     foreach ( $pages as $page ) {
+                                //         echo "<li>$page</li>";
+                                //     }
+                                //    echo '</ul></div>';
+                                // }
+
+                                
+
                             ?>
+
+                                <!-- <div class="row mt25 animated" data-animation="fadeInUp" data-animation-delay="100">
+                                    <div class="col-md-6">
+                                        <a href="<?php previous_posts_link('&laquo; Previous Entries'); ?>" class="button button-sm button-pasific pull-left hover-skew-backward">Old Entries</a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="<?php next_posts_link('Next Entries &raquo;',''); ?>" class="button button-sm button-pasific pull-right hover-skew-forward">New Entries</a>
+                                    </div>
+                                </div> -->
                         </div>
                     </div>
                     

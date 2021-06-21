@@ -94,12 +94,11 @@
             <span class="heading-divider mt10"></span>
         </h5>
         <ul class="shop-sidebar pl25">
-            <?php wp_list_pages(
-                array(
-                    'title_li' => '',
-                    'except' => 3
-                )
-            ); ?>
+            <?php wp_list_pages('exclude=3,15,42&title_li=');
+                //     'title_li' => '',
+                //     'exclude' => 3, 15, 42
+                // )
+             ?>
         </ul>
         
     </div>

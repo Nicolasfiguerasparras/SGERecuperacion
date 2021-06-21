@@ -26,7 +26,7 @@
                         <div class="col-md-12 pt50">
                             <h1 class="brand-heading font-montserrat text-uppercase color-light" data-in-effect="fadeInDown">
                                 Author page
-                                <small class="color-light alpha7"><?php echo $curauth->first_name." ".$curauth->last_name; ?></small>
+                                <small class="color-light alpha7"><?php echo $curauth->first_name." ".$curauth->last_name; ?>, <?php echo get_author_role($curauth->ID); ?></small>
                             </h1>                            
                         </div>
                     </div>
@@ -149,8 +149,10 @@
                                 <i class="fa fa-tags"></i>
                                 <?php
                                     $tags = get_the_tags(get_the_ID());
-                                    foreach($tags as $tag) {
-                                        echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> ';
+                                    if($tags){
+                                        foreach($tags as $tag) {
+                                            echo '<a href="' . get_tag_link($tag->term_id) . '">' . $tag->name . '</a> ';
+                                        }
                                     }
                                 ?>
                             </div>

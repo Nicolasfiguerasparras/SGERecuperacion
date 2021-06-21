@@ -30,8 +30,8 @@
                     </div>
                     <div class="col-md-6 text-right pt35">
                         <ul class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Blog Page</a></li>
+                            <li><a href="<?php echo get_home_url(); ?>">Home</a></li>
+                            <li><a href="<?php echo get_page_link( get_page_by_title('Blog')->ID ); ?>">Blog Page</a></li>
                             <li>Blog Post</li>
                         </ul>
                     </div>
@@ -116,6 +116,9 @@
 
                                 </div>
 
+                            </div>
+                            <div class="col-md-8 col-md-offset-2" id="comments">
+
                                 <div class="blog-post-leave-comment">
                                     <h5><i class="fa fa-comments-o mb25"></i> <?php echo $comments_number; ?></h5>
                                     <?php 
@@ -130,29 +133,33 @@
 
                                 <!-- Blog Paging
                                 ===================================== -->
-                                <div class="row mt25 animated" data-animation="fadeInUp" data-animation-delay="100">
+                                <!-- <div class="row mt25 animated" data-animation="fadeInUp" data-animation-delay="100">
                                     <div class="col-md-6">
                                         <a href="#" class="button button-sm button-pasific pull-left hover-skew-backward">Old Entries</a>
                                     </div>
                                     <div class="col-md-6">
                                         <a href="#" class="button button-sm button-pasific pull-right hover-skew-forward">New Entries</a>
                                     </div>
-                                </div>
+                                </div> -->
+
+                                
                             </div>
 
                         </div>
                        
                         
+                        
+
                     </div>
                     
-                    
-                   <?php 
+                    <?php 
                         get_sidebar();   
-                    ?>                     
-                    
+                    ?>
+
                 </div>                
                 
             </div>
+
         </div>
 
 <?php
