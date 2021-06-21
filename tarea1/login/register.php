@@ -1,15 +1,93 @@
 <?php
     require_once('header.php');
+
+    if(isset($_POST['submit'])){
+        $username = $_POST['username'];
+        $password = sha1($_POST['password']);
+        $first_name = $_POST['first_name'];
+        $last_name = $_POST['last_name'];
+        $email = $_POST['email'];
+        $birth_date = $_POST['birth_date'];
+        $address = $_POST['address'];
+        $postal_code = $_POST['postal_code'];
+        $city = $_POST['city'];
+        $state = $_POST['state'];
+
+        $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $stmt = $dbh->prepare($sql);
+
+        $stmt = $dbh->prepare("INSERT INTO `users` (`id`, 
+                                                    `username`, 
+                                                    `password`, 
+                                                    `first_name`, 
+                                                    `last_name`, 
+                                                    `email`, 
+                                                    `birth_date`, 
+                                                    `address`, 
+                                                    `postal_code`, 
+                                                    `city`, 
+                                                    `state`, 
+                                                    `member_from`, 
+                                                    `status`, 
+                                                    `trash`) 
+                                            VALUES (NULL, 
+                                                    :username, 
+                                                    :password, 
+                                                    :first_name, 
+                                                    :last_name, 
+                                                    :email, 
+                                                    :birth_date, 
+                                                    :address, 
+                                                    :postal_code, 
+                                                    :city, 
+                                                    :state, 
+                                                    :member_from, 
+                                                    '1', 
+                                                    '0')
+                                ");
+        $stmt->execute(
+                        array(
+                            ':username' => $username,
+                            ':password' => $password, 
+                            ':first_name' => $first_name, 
+                            ':last_name' => $last_name, 
+                            ':email' => $email, 
+                            ':birth_date' => $birth_date, 
+                            ':address' => $address, 
+                            ':postal_code' => $postal_code, 
+                            ':city' => $city, 
+                            ':state' => $state, 
+                            ':member_from' => date('Y-m-d')
+                        )
+                    );
+        $row = $stmt-> fetch(PDO::FETCH_ASSOC);
+        
+        header("Location: ../user/");
+        
+    }
 ?>
-<div class="container-fluid">
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-10 offset-1" style="text-align: center">
+
+            <h1>Create profile</h1>
+
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-10 offset-1">
-            <h1>Create profile</h1>
             <form method="POST" action="<?php $_SERVER['PHP_SELF']; ?>">
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password" name="password">
                     </div>
                     <div class="form-group col-md-12">
                         <label for="first_name">First Name</label>
@@ -51,6 +129,7 @@
 
                 <br>
                 <button type="submit" class="btn btn-primary" name="submit">Create profile</button>
+                <a class="btn btn-danger" href="../login/">Go back</a>
             </form>
         </div>
     </div>

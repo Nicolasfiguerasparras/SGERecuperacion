@@ -10,7 +10,7 @@
                         <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
                         <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
                         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="login/">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../login/logout.php">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +25,6 @@
                     </div>
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 mb-5">Start Bootstrap can help you build better websites using the Bootstrap framework! Just download a theme and start customizing, no strings attached!</p>
-                        <a class="btn btn-primary btn-xl" href="login/">Login</a>
                     </div>
                 </div>
             </div>

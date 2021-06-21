@@ -4,7 +4,11 @@
 	$error = "";
 
 	if(func::checkLogin($dbh)){
-		header('Location: index.php');
+		if($_SESSION['user_id'] == 1){
+			header("Location: ../admin/");
+		}else{
+			header('Location: ../user/');
+		}
 	}else{
 		if(isset($_POST['submit'])){
 			if(isset($_POST['user']) && isset($_POST['password']) && !empty($_POST['user']) && !empty($_POST['password'])){
@@ -20,12 +24,64 @@
 					// Check if user wants to remember session
 					if(isset($_POST['remember'])){
 						if($_POST['remember'] == 1){
-							func::recordSession($dbh, $row['users_id'], $username, 1);
+							// Delete the old session for that user if exists
+							$dbh->prepare("DELETE FROM sessions WHERE session_userid = :session_userid")->execute(array(':session_userid'=>$row['id']));
+            
+							// create token and serial strings
+							$token = func::createSerial(40);
+							$serial = func::createSerial(40);
+						
+							setcookie('user_id', $row['id'], time() + (3600 * 24 * 7), "/");
+							setcookie('username', $user_username, time() + (3600 * 24 * 7), "/");
+							setcookie('token', $token, time() + (3600 * 24 * 7), "/");
+							setcookie('serial', $serial, time() + (3600 * 24 * 7), "/");
+							
+							$_SESSION['user_id'] = $row['id'];
+							$_SESSION['username'] = $username;
+							$_SESSION['token'] = $token;
+							$_SESSION['serial'] = $serial;
+													 
+							// Restore session in DB with the new data
+							$stmt = $dbh->prepare("INSERT INTO `sessions`(`session_id`, `session_token`, `session_serial`, `session_date`, `session_userid`) VALUES (NULL, :token, :serial, now(), :session_userid);");
+							$stmt->execute(array(':token'=>$token, ':serial'=>$serial, ':session_userid'=>$row['id']));
 						}else{
-							func::recordSession($dbh, $row['users_id'], $username, 0);
+							// Delete the old session for that user if exists
+							$dbh->prepare("DELETE FROM sessions WHERE session_userid = :session_userid")->execute(array(':session_userid'=>$row['id']));
+            
+							// create token and serial strings
+							$token = func::createSerial(40);
+							$serial = func::createSerial(40);
+							
+							$_SESSION['user_id'] = $row['id'];
+							$_SESSION['username'] = $username;
+							$_SESSION['token'] = $token;
+							$_SESSION['serial'] = $serial;
+													 
+							// Restore session in DB with the new data
+							$stmt = $dbh->prepare("INSERT INTO `sessions`(`session_id`, `session_token`, `session_serial`, `session_date`, `session_userid`) VALUES (NULL, :token, :serial, now(), :session_userid);");
+							$stmt->execute(array(':token'=>$token, ':serial'=>$serial, ':session_userid'=>$row['id']));
 						}
+					}else{
+						$dbh->prepare("DELETE FROM sessions WHERE session_userid = :session_userid")->execute(array(':session_userid'=>$row['id']));
+            
+						// create token and serial strings
+						$token = func::createSerial(40);
+						$serial = func::createSerial(40);
+						
+						$_SESSION['user_id'] = $row['id'];
+						$_SESSION['username'] = $username;
+						$_SESSION['token'] = $token;
+						$_SESSION['serial'] = $serial;
+													
+						// Restore session in DB with the new data
+						$stmt = $dbh->prepare("INSERT INTO `sessions`(`session_id`, `session_token`, `session_serial`, `session_date`, `session_userid`) VALUES (NULL, :token, :serial, now(), :session_userid);");
+						$stmt->execute(array(':token'=>$token, ':serial'=>$serial, ':session_userid'=>$row['id']));
 					}
-					header('Location: ../index.php');
+					if($row['id'] == 1){
+						header("Location: ../admin/");
+					}else{
+						header('Location: ../user/');
+					}
 				}else{
 					$error = 1; // No user with those credentials
 				}

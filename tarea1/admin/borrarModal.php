@@ -3,7 +3,7 @@
 
     if(isset($_POST['confirmar'])){
         $id = $_POST['id'];
-        $queryUser = "UPDATE `users` SET `trash` = '1' WHERE `users`.`id` = $id";
+        $queryUser = "UPDATE `users` SET `trash` = '1', `status` = '1' WHERE `users`.`id` = $id";
         $stmt = $dbh->prepare($queryUser);
         $stmt->execute();
         header('Location: index.php');

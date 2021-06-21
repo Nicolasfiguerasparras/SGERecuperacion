@@ -1,5 +1,13 @@
 <?php
     require_once('../dbArrayConf.php');
+
+    if(func::checkLogin($dbh)){
+        if(!$_SESSION['user_id'] == 1){
+            header("Location: ../user/");
+        }
+    }else{
+        header("Location: ../login");
+    }
 ?>
 
 <!DOCTYPE html>

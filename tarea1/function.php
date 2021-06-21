@@ -8,48 +8,83 @@
         public static function checkLogin($dbh) {
             
             if (!isset($_SESSION)) {
-                // echo '<p class="error1">crea la sesion en checkLOGIn</p>';
+                // Si no existe, la creamos
                 session_start();
-                
             }
-            /* The user only will be considered logged in when 
-               1. The sessions cookies exists and match the session record (PERSISTENT SESSION)
-               2. The sessions cookies doesn't exist but we have sessions variables that match the session record (NON PERSISTENT SESSION)
-            */
-            if (isset($_COOKIE['user_id']) && isset($_COOKIE['token'])  && isset($_COOKIE['serial']) ){
-                //Check the Data Base
+    
+            // Comprobamos si hay guardados datos del usuario en cookies
+            // Los campos de las cookies user_id, token y serial
+            if(isset($_COOKIE['user_id']) && isset($_COOKIE['token']) && isset($_COOKIE['serial'])) {
+                // Harvesting de los datos
                 $user_id = $_COOKIE['user_id'];
                 $token = $_COOKIE['token'];
                 $serial = $_COOKIE['serial'];
-         
-                $query = "SELECT * FROM sessions WHERE session_userid = :userid AND session_token = :token AND session_serial = :serial;";
+    
+                // Consultamos la BBDD con sentencias preparadas
+                $query = "SELECT * FROM sessions WHERE userid = :userid AND token = :token AND serial = :serial";
+                // Con la conexión recibida por parámetro, preparamos la consulta
                 $stmt = $dbh->prepare($query);
-                $stmt->execute(array(':userid' => $user_id, ':token'=>$token, ':serial'=>$serial));
-              
-                $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-                if ( $row['session_userid'] > 0) {
-                        // The session come from the previous persistence
-                        // Create Session
-                        func::createSession($_COOKIE['user_id'],$_COOKIE['username'],$_COOKIE['token'],$_COOKIE['serial']);
-                        return true;
-                }   
-            } else {
-                //We try to check log with the session variables 
-                if (isset($_SESSION['user_id'])){
-                    
-                    $user_id = $_SESSION['user_id'];
-                    $token = $_SESSION['token'];
-                    $serial = $_SESSION['serial'];
-                    
-                    $query = "SELECT * FROM sessions WHERE session_userid = :userid AND session_token = :token AND session_serial = :serial;";
-                    $stmt = $dbh->prepare($query);
-                    $stmt->execute(array(':userid' => $user_id, ':token'=>$token, ':serial'=>$serial));
-                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-                    if ( $row['session_userid'] > 0 ) {
-                            return true;
-                    }
+                $stms->execute(
+                    array(
+                        ':userid' => $user_id,
+                        ':token' => $token,
+                        ':serial' => $serial
+                    )
+                );
+    
+                // Almacenamos los resultados en una variable
+                $resultados = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                // Comprobamos que existen datos en la variable resultados
+                if(!empty($resultados)) {
+                    // Hacemos persistente la sesión
+                    setcookie('user_id', $user_id, time() + (3600*24*7), "/");
+                    setcookie('token', createserial(40), time() + (3600*24*7), "/");
+                    setcookie('serial', $user_id, createserial(40), time() + (3600*24*7), "/");
+                
+                    // Llegados a este punto, podemos verificar que estamos loggeados y se ha reiniciado la persistencia de la sesión
+                    return true;
                 }
+
+                if($user_id){
+                    // Hacemos persistente la sesión
+                    setcookie('user_id', $user_id, time() + (3600*24*7), "/");
+                    setcookie('token', createserial(40), time() + (3600*24*7), "/");
+                    setcookie('serial', $user_id, createserial(40), time() + (3600*24*7), "/");
+                    return true;
+                }
+    
+            // Si no existe la cookies, comprobamos si existen datos en $_SESSION
+            } elseif(isset($_SESSION['user_id']) && isset($_SESSION['token']) && isset($_SESSION['serial'])) {
+                // Harvesting de los datos
+                $user_id = $_SESSION['user_id'];
+                $token = $_SESSION['token'];
+                $serial = $_SESSION['serial'];
+    
+                // Consultamos la BBDD con sentencias preparadas
+                $query = "SELECT * FROM sessions WHERE session_userid = :userid AND session_token = :token AND session_serial = :serial";
+                // Con la conexión recibida por parámetro, preparamos la consulta
+                $stmt = $dbh->prepare($query);
+                $stmt->execute(
+                    array(
+                        ':userid' => $user_id,
+                        ':token' => $token,
+                        ':serial' => $serial
+                    )
+                );
+    
+                // Almacenamos los resultados en una variable
+                $resultados = $stmt->fetch(PDO::FETCH_ASSOC);                
+    
+                if(!empty($resultados)){
+                    return true;
+                }
+
+                if(isset($_SESSION['user_id'])){
+                    return true;
+                }
+            }else{
+                return false;
             }
         }
         

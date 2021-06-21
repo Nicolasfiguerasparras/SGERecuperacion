@@ -52,7 +52,7 @@
 ?>
         
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Tarea 1</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="index.php">Tarea 1</a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -75,12 +75,6 @@
                             <a class="nav-link active" aria-current="page" href="index.php">
                                 <span data-feather="home"></span>
                                 Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../index.php">
-                                <span data-feather="file"></span>
-                                Front end
                             </a>
                         </li>
                         <li class="nav-item">
@@ -224,10 +218,10 @@
                                             $members = "SELECT * FROM users LIMIT $start,5";
                                         }elseif($_GET['type'] == 1){
                                             $type = $_GET['type'];
-                                            $members = "SELECT * FROM users WHERE status = 1 LIMIT $start,5";
+                                            $members = "SELECT * FROM users WHERE status = 0 LIMIT $start,5";
                                         }elseif($_GET['type'] == 2){
                                             $type = $_GET['type'];
-                                            $members = "SELECT * FROM users WHERE trash = 1 LIMIT $start,5";
+                                            $members = "SELECT * FROM users WHERE status = 1 LIMIT $start,5";
                                         }
                                     }else{
                                         $type = 0;
